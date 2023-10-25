@@ -34,7 +34,12 @@ document.getElementById('saveBtn').onclick = function(e) { //이벤트핸들러 
     let name = document.getElementById('name').value;
     let age = document.getElementById('age').value;
     let height = document.getElementById('height').value;
-
+	
+	if(!name || !age || !height){
+		alert("값을 입력하세요!!!!");
+		return; //★★ return 쓰면 함수 종료됨! 아래로 진행X
+	}
+	
     const mem = new Member(name, age, height);
  
     
