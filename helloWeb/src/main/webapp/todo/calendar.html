@@ -12,58 +12,60 @@
 	<script>
 		//calendar => table
 		
-		const cal={
-			week: ['일','월','화','수','목','금','토'],
-			
-			day = function(day){
-				for(let i=1; i<=31; i++){
-					if(i % 7 == 0){
-						다음줄로내리기.
-					}
-					for(let prop in cal){
-					innerHTML = cal[day]
-				}
-			}
-			},
-			
-			makeHead(num){
-			let str = '';
-			str += '<tr>';
 	
-			for(let prop in cal){
-				str += '<td>' + cal.week + '</td>'
-			}
-			str += '</tr>';
-			return str;
-		},
+	const cal={
+			
+		//요일
+			makeHead(){
+			let day = ['일','월','화','수','목','금','토'];
+			let hd ='';
+			hd += '<thead>';
+			hd += '<tr>';	
+			
+			day.forEach(function(day){
+				hd += '<th>'+day+'</th>'
+			});
+			hd += '</tr>'	;
+			hd+='</thead>';
+			return hd;
+			},
 		
+		//일
+			makeBody(){
+				let bd ='';
+				bd += '<tbody>'
+				bd += '<tr>'
+				for(let i=1; i<=31; i++){
+					bd += i
+					if(i % 7 == 0){
+						bd += '<tr></tr>'
+					}
+				}
+				bd += '</tr>'
+			},
+		
+		
+		//넣어주고
+		makeCalendar(){
+			let tb = '<table border="1"><tbody>'
+			tb += calAry.reduce((acc, day) => acc + this.makeHead() + this.makeBody(), '')
+			
+			tb += '</table><tbody>'
+			this.table = tb;
+			},
+				
+		//화면에 보이게! 
+		showCal(dom){
+			dom.innerHTML = this.table;
+		}
 
-		makeBody(){
-			let str = '';
-			str += '<tr>'
-			for(let prop in day){
-				str += '<td>' + cal.day + '</td>'
-			}
-			str += '</tr>'
-			return str;
-		},
-		
-			makeCalendar(array){
-			let table = '<table border="1"><tbody>'
-			table += array.reduce(acc, cal.day) => acc + this.makeBody(cal.day), '0');
-			table += '</table ></tbody>';
-			this.html = table;
-		},
-		 
-		 showCal(dom){
-			 dom.innerHTML=this.html;
-		 }
-		
-		
-		} //cal
-		
-		
-		showCal(getElementById('show'));
+	}
+	
+	cal.makeCalendar();
+	cal.showCal(document.getElementById('show'));
+
+
+
 		
 	
 	</script>
