@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>js/function.html</title>
+</head>
+
+<body>
+
+    <table border="1">
+        <tr>
+            <th>이름</th>
+            <td><input type="text"  id="name" value="홍길동"></td> 
+        </tr>
+        <tr>
+            <th>나이</th>
+            <td><input type="number"  id="age" value ="20"></td>
+        </tr>
+        <tr>
+            <th>키</th>
+            <td><input type="text"  id="height" value ="175.7"></td>
+        </tr>
+        <tr>
+            <td colspan ="2">
+                <button id="saveBtn">저장</button> 
+            </td>
+        </tr>
+    </table>
+	
+
+
+	<div id="show">
+        <table>
+            <thead>
+                <tr>
+                    <th>이름</th>
+                    <th>나이</th>
+                    <th>키</th>
+                    <th>소개</th>
+                    <th>삭제</th>
+
+                </tr>
+            </thead>
+            <tbody id="list">여기다가 넣는거!</tbody>
+        </table>
+    
+
+        <!-- table>(thead>tr>th*2)+(tbody>tr>td*2); -->
+
+
+
+    </div>
+	
+	<!-- <script src ="function.js"></script> <!- ctrl 누르고 클릭! -->
+    <!--<script src ="function2.js"></script>  -->
+    <script src = "member.js"></script> <!-- 생성자 makeTr 함수 쓸수 있음.-->
+    <script src ="function4.js"></script> 
+	
+
+   
+</body>
+
+</html>

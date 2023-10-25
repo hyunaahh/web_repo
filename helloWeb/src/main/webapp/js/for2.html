@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>js/for2.html</title>
+</head>
+
+<body>
+    <script>
+        //js에선 {중괄호}이 객체 - 배열안에 객체 넣음
+        const studentAry = [
+            {sno: 1, sname: '홍길동', score:80},
+            {sno: 2, sname: '박민서', score:88},
+            {sno: 3, sname: '최창식;', score:92}
+        ]
+        //forEach(function(필요한 것만 넣으면 됨.  )
+        studentAry.forEach(function(item, idx){
+            console.log(item);
+        })
+        
+        studentAry.forEach(function(item, idx){
+            console.log(`이름: ${item.sname}`);
+                  })
+
+        let sum = avg = 0;
+        studentAry.forEach(function(item, idx, ary){
+            
+            sum += item.score;
+            
+            if(idx == ary.length -1){
+                avg = sum / ary.length;
+                avg= avg.toFixed(2);
+            }
+        })
+        console.log(`점수합계: ${sum}이고, 평균은 : ${avg}입니다.`);
+        
+
+
+    </script>
+</body>
+
+</html>
