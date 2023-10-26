@@ -3,72 +3,17 @@
 
 <head>
 	<meta charset="UTF-8">
-	<title>Insert title here</title>
+	<title>다시해라현아야... </title>
 </head>
 
 <body>
-	<div id="show"></div>
+	<div id="show">
+		
+	</div>
+	<script src ="calendar.js"></script>
 	
-	<script>
-		//calendar => table
-		
+
 	
-	const cal={
-			
-		//요일
-			makeHead(){
-			let day = ['일','월','화','수','목','금','토'];
-			let hd ='';
-			hd += '<thead>';
-			hd += '<tr>';	
-			
-			day.forEach(function(day){
-				hd += '<th>'+day+'</th>'
-			});
-			hd += '</tr>'	;
-			hd+='</thead>';
-			return hd;
-			},
-		
-		//일
-			makeBody(){
-				let bd ='';
-				bd += '<tbody>'
-				bd += '<tr>'
-				for(let i=1; i<=31; i++){
-					bd += i
-					if(i % 7 == 0){
-						bd += '<tr></tr>'
-					}
-				}
-				bd += '</tr>'
-			},
-		
-		
-		//넣어주고
-		makeCalendar(){
-			let tb = '<table border="1"><tbody>'
-			tb += calAry.reduce((acc, day) => acc + this.makeHead() + this.makeBody(), '')
-			
-			tb += '</table><tbody>'
-			this.table = tb;
-			},
-				
-		//화면에 보이게! 
-		showCal(dom){
-			dom.innerHTML = this.table;
-		}
-
-	}
-	
-	cal.makeCalendar();
-	cal.showCal(document.getElementById('show'));
-
-
-
-		
-	
-	</script>
 </body>
 
 </html>
