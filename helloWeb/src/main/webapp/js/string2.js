@@ -39,19 +39,20 @@ console.log(checkGender(ssn));
  let file = "d:/temp/sample/folder/book.xls"
 // let fileName, fileExt
 
-// 확장자 : 맨 뒤에서 . 뒤에꺼출력하면 됨 > .을 찾아서 그 뒤에꺼 출력하면 됨.
-// 파일명 : .앞에꺼 출력하면 되고.
-
-
-if(file.includes(".")==true){
-	let fileExt = file.substr(file.lastIndexOf("."),4);
-	console.log(fileExt);}
-	
-if(file.includes("/")==true){
-	let fileName = file.substr(file.lastIndexOf("/"),file.lastIndexOf(".") );
-	console.log(fileName);
-}
 
 
 
+// 아 저거아니고 1번처럼 split을 써보쟈.. 
+let dot = file.split('.'); // 
+console.log('.기준 : ', dot);
+let fileExt = dot[1];
+console.log(fileExt); 
+
+
+
+// 앞에 짜른거에서 하자..
+let slash = dot.split('/');
+console.log('/기준 : ', slash);
+let fileName = slash[slash.length - 1]
+console.log(fileName);
 

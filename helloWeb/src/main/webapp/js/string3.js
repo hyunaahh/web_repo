@@ -9,7 +9,7 @@ today.getDate(); //26
 //지정하는 값으로 날짜 변경
 today.setFullYear(2022); //날짜지정
 today.setMonth(0); //1월
-today.setDate(10); //1일
+today.setDate(1); //1일
 today.setHours(10); //10시
 
 
@@ -22,7 +22,8 @@ console.log(today.toLocaleDateString()); //2022.1.1
 function dateFormat(today){
 	//yyyy-mm-dd hh24:mm:ss
 	return today.getFullYear() + "-" + ("0" + (today.getMonth()+1)).slice(-2) + "-" + + ("0" + today.getDate()).slice(-2)
-	+ " " + today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
+	+ " " + ("0"+ today.getHours()).slice(-2) + ":" 
+	+ ("0" + today.getMinutes()).slice(-2) + ":" + ("0"+ today.getSeconds()).slice(-2);
 	
-}"0"
+} 
 console.log(dateFormat(today))
