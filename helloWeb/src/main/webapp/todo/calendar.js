@@ -40,8 +40,7 @@
 						bd += '<td align ="right">' + i + '</td>'    
 					}
 				
-					
-				
+
 	             	if (i % 7 == 0) { // 줄바꿈
 	                   bd += '</tr><tr>'
 	                   } // if	
@@ -66,16 +65,18 @@
 			},
 
 			//화면에 보이게! 
-			showCal(dom) {
-				dom.innerHTML = this.table;
+			showCalendar() {
+				document.getElementById('show').innerHTML = this.table;
 			}
 
 		}
 
 		cal.makeCalendar();
-		cal.showCal(document.getElementById('show'));
+		cal.showCalendar();
+		
+		export{cal}
 
-
+	
 
 
 

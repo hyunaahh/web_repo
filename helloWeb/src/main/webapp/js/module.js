@@ -1,7 +1,7 @@
 //module.js (friend랑 연결됨)
 
 import {friend, friendInfo} from './friend.js';
-import{cal} from '../todo/calendar.js';
+import {cal} from '../todo/calendar.js';
 
 
 

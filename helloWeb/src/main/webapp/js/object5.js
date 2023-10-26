@@ -7,7 +7,7 @@ const obj1 = {
 	//bloodtype
 }
 
-const obj3 = obj1; // obj3고치면 1도 바뀜.
+const obj3 = obj1; // obj3고치면 1도 바뀜. 주소same
 console.log(obj1); // prototype 추가하고 다시 콘솔 찍어보기. 삼각형 열어보삼.. 
 
 
