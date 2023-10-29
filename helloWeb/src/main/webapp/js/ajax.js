@@ -29,9 +29,9 @@ console.log(friends);
 
 //XML .... 
 	//Q. 
+	//newMember 값을 활용해서 tbody="list"추가하기.
 	let newMember = {mid:"M009", pass:"9999", name:"민식이", phone: "010-9999-9999"}
 	
-	//newMember 값을 활용해서 tbody="list"추가하기.
 	
 	
 let xhtp = new XMLHttpRequest(); // 비동기의 대표적인 방식
@@ -40,15 +40,24 @@ xhtp.send(); //실행
 
 xhtp.onload = loadJson;
 function loadJson(){
-	console.log(xhtp.responseText);
-	let result = JSON.parse(xhtp.responseText); // json문자열을 js 오브젝트타입으로
-	console.log(result);
+	console.log("rp text : " , xhtp.responseText);
+	let jParse = JSON.parse(xhtp.responseText); // json문자열을 js 오브젝트타입으로
+	console.log("json result: ", jParse);
 	//**** xml연결해서 화면에 표 띄워졌던 것처럼 json연결하면 화면에 표 띄울 수 있게 만드는거 숙제.
-	let doc = xhtp.responseJSON;
-	let records2 = doc.getElementsByTagName('vo');
-	console.log("records2 : ", records2)
-	let titles =
-	
+	let titles = ["회원번호", "비번", "이름", "연락처"];
+	let dataAry = [];
+	for(item of jParse){
+		let obj = {
+			mid : item.mid,
+			pass : item.pass,
+			name: item.name,
+			phone: item.phone
+		}
+		dataAry.push(obj);
+			} //for 
+	let result = table.makeTable(titles, dataAry);
+	console.log(result);
+	document.getElementById("show").innerHTML = result;
 }//loadJson
 
 

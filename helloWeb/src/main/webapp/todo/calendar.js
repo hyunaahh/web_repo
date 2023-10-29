@@ -52,9 +52,6 @@
 			
 			
 			
-	
-		
-
 			//넣어주고
 			makeCalendar() {
 				let tb = '<table border="1">'
