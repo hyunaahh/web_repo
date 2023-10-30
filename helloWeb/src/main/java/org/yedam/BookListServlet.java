@@ -10,21 +10,21 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.yedam.service.MemberService;
-import org.yedam.service.MemberServiceImpl;
-import org.yedam.service.MemberVO;
+import org.yedam.service.BookService;
+import org.yedam.service.BookServiceImpl;
+import org.yedam.service.BookVO;
 
 /**
- * Servlet implementation class MemberListServ
+ * Servlet implementation class BookListServlet
  */
-@WebServlet("/MemberListServ2")
-public class MemberListServ2 extends HttpServlet {
+@WebServlet("/BookListServlet.html")
+public class BookListServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public MemberListServ2() { //주소값.
+    public BookListServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -32,30 +32,28 @@ public class MemberListServ2 extends HttpServlet {
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
-    //주소에 있는게 실행됨.
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
-		MemberService svc = new MemberServiceImpl();
-		List<MemberVO> list = svc.memberList(); 
-		System.out.println("json입니다.");
+		BookService svc = new BookServiceImpl();
+		List<BookVO> list = svc.bookList();
 		response.setContentType("text/json;charset=utf-8");
 		PrintWriter out = response.getWriter();
-		//[{"mid":value,"pass":value,"name":value,"phone":value}] : json포맷 (vo.get뭐시기에 다 숫자아니고 문자라서 여기도 \"해줘야됨. 문자는 필요업스
 		String str = "[";
 		int cnt = 0;
-		for(MemberVO vo : list) {
+		for(BookVO vo : list) {
 			str += "{";
-			str += "\"mid\":\"" + vo.getMid() + "\",";
-			str += "\"pass\":\"" + vo.getPass() + "\",";
-			str += "\"name\":\"" + vo.getName() + "\",";
-			str += "\"phone\":\"" + vo.getPhone() + "\"";
+			str += "\"code\":\"" + vo.getCode() + "\",";
+			str += "\"title\":\"" + vo.getTitle() + "\",";
+			str += "\"author\":\"" + vo.getAuthor() + "\",";
+			str += "\"press\":\"" + vo.getPress() + "\",";
+			str += "\"price\":\"" + vo.getPrice() + "\"";
 			str += "}";
+			
 			if(++cnt != list.size()) {
-				str += ","; //마지막에 ,찍으면 안되서 마지막 아니면 ,찍겠금 만들었음.
+				str += ",";
 			}
 		}
-		str += "]";
-		out.print(str); //run on server 해보기
+		 str = "]";
+		 out.print(str);
 	} //doget
 
 	/**

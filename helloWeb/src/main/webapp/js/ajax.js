@@ -27,26 +27,28 @@ friends.push('최길동');
 console.log(friends);
 
 
+
+// 목록 가져오는 애들
 //XML .... 
 	//Q. 
 	//newMember 값을 활용해서 tbody="list"추가하기.
 	let newMember = {mid:"M009", pass:"9999", name:"민식이", phone: "010-9999-9999"}
 	
 	
-	
+//AJAX	
 let xhtp = new XMLHttpRequest(); // 비동기의 대표적인 방식
-xhtp.open('get','../MemberListServ2');
+xhtp.open('get','../MemberListServ2'); //data 가져옴
 xhtp.send(); //실행
 
 xhtp.onload = loadJson;
 function loadJson(){
 	console.log("rp text : " , xhtp.responseText);
-	let jParse = JSON.parse(xhtp.responseText); // json문자열을 js 오브젝트타입으로
+	let jParse = JSON.parse(xhtp.responseText); // json문자열을 js 객체타입으로 ! 얘는 실제 "배열"임.
 	console.log("json result: ", jParse);
 	//**** xml연결해서 화면에 표 띄워졌던 것처럼 json연결하면 화면에 표 띄울 수 있게 만드는거 숙제.
 	let titles = ["회원번호", "비번", "이름", "연락처"];
 	let dataAry = [];
-	for(item of jParse){
+	for(let item of jParse){
 		let obj = {
 			mid : item.mid,
 			pass : item.pass,
@@ -58,7 +60,22 @@ function loadJson(){
 	let result = table.makeTable(titles, dataAry);
 	console.log(result);
 	document.getElementById("show").innerHTML = result;
+	
+			/* ** PROF
+				let jParse = JSON.parse(xhtp.responseText);
+				let titles = ["회원번호", "비번", "이름", "연락처"];
+				let dataAry = [];
+				jParse.forEach((member)=>{
+					dataAray.push(mid: member.mid, pass: member.pass, name: member.name, phone: member.phone);
+				})
+				let result = table.makeTable(titles, dataAry);
+				console.log(result);
+				document.getElementById("show").innerHTML = result;
+			*/
+			
 }//loadJson
+
+
 
 
 function loadXML(){
@@ -89,6 +106,7 @@ function loadXML(){
 	document.getElementById('list').innerHTML += tr;
 	
 } 
+
 
 
  

@@ -1,5 +1,22 @@
 package org.yedam.service;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
+
+//lombok 통해서 만듦 @~~ 
+
+@Setter
+@Getter
+@ToString
+
+@Data
+@AllArgsConstructor //모든 필드값 생성자 생김.
+@NoArgsConstructor // 기본생성자
+
 public class MemberVO {
 	private String mid;
 	private String pass;
@@ -7,7 +24,7 @@ public class MemberVO {
 	private String phone;
 	
 	
-	public String getMid() {
+	/*public String getMid() {
 		return mid;
 	}
 	public void setMid(String mid) {
@@ -30,5 +47,5 @@ public class MemberVO {
 	}
 	public void setPhone(String phone) {
 		this.phone = phone;
-	}
+	}*/
 }

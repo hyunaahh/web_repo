@@ -2,7 +2,8 @@ package org.yedam;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -14,49 +15,53 @@ import org.yedam.service.MemberService;
 import org.yedam.service.MemberServiceImpl;
 import org.yedam.service.MemberVO;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+
 /**
- * Servlet implementation class MemberListServ
+ * Servlet implementation class ModMemberServ
  */
-@WebServlet("/MemberListServ2")
-public class MemberListServ2 extends HttpServlet {
+@WebServlet("/ModMemberServ.html")
+public class ModMemberServ extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public MemberListServ2() { //주소값.
+    public ModMemberServ() {
         super();
-        // TODO Auto-generated constructor stub
+        
     }
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
-    //주소에 있는게 실행됨.
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		String mid = request.getParameter("mid");
+		String pass = request.getParameter("pass");
+		String name = request.getParameter("name");
+		String phone = request.getParameter("phone");
+		
+		MemberVO vo = new MemberVO(mid, pass, name, phone);
+		//수정처리하는 servlet
+		//mid, pass, name, phone => db update 처리.
 		
 		MemberService svc = new MemberServiceImpl();
-		List<MemberVO> list = svc.memberList(); 
-		System.out.println("json입니다.");
-		response.setContentType("text/json;charset=utf-8");
 		PrintWriter out = response.getWriter();
-		//[{"mid":value,"pass":value,"name":value,"phone":value}] : json포맷 (vo.get뭐시기에 다 숫자아니고 문자라서 여기도 \"해줘야됨. 문자는 필요업스
-		String str = "[";
-		int cnt = 0;
-		for(MemberVO vo : list) {
-			str += "{";
-			str += "\"mid\":\"" + vo.getMid() + "\",";
-			str += "\"pass\":\"" + vo.getPass() + "\",";
-			str += "\"name\":\"" + vo.getName() + "\",";
-			str += "\"phone\":\"" + vo.getPhone() + "\"";
-			str += "}";
-			if(++cnt != list.size()) {
-				str += ","; //마지막에 ,찍으면 안되서 마지막 아니면 ,찍겠금 만들었음.
-			}
+		Gson gson = new GsonBuilder().create(); 
+		
+		Map<String, Object> map = new HashMap<>();
+		
+		if(svc.modifyMember(vo)) {
+			map.put("retCode", "OK");
+			map.put("vo", vo);
+		}else {
+			map.put("retCode", "NG");
+			map.put("vo", vo.getMid());
 		}
-		str += "]";
-		out.print(str); //run on server 해보기
-	} //doget
+		String json = gson.toJson(map);
+		out.print(json);
+	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)

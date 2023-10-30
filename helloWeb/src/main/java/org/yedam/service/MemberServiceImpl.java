@@ -51,4 +51,76 @@ import org.yedam.common.DataSource;
 			}
 			return members;
 		}
+		
+
+		@Override
+		public boolean addMember(MemberVO vo) {
+			String sql = "insert into member values (?, ?, ?, ?)";
+			conn = dataSource.getConnection();
+			
+			try {
+				psmt = conn.prepareStatement(sql);  //prepare객체가 쿼리실행해서 
+				psmt.setString(1, vo.getMid());
+				psmt.setString(2, vo.getPass());
+				psmt.setString(3, vo.getName());
+				psmt.setString(4, vo.getPhone());
+				
+				int r = psmt.executeUpdate(); //반환값은 데이터처리 건수.
+				if(r==1) {
+					return true; //boolean 이니까
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}finally {
+				try {
+					if(rs != null)
+						rs.close();
+					if(psmt !=null)
+						psmt.close();
+					if(conn !=null)
+						conn.close();
+					
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+			return false;
+		} //addMem
+		
+		@Override
+		public boolean modifyMember(MemberVO vo) {
+			String sql = "UPDATE MEMBER SET PASS=?, NAME=?, PHONE=? WHERE MID=?";
+			conn = dataSource.getConnection();
+			
+			try {
+				psmt = conn.prepareStatement(sql);  //prepare객체가 쿼리실행해서 
+				
+				psmt.setString(1, vo.getPass());
+				psmt.setString(2, vo.getName());
+				psmt.setString(3, vo.getPhone());
+				psmt.setString(4, vo.getMid());
+				
+				int r = psmt.executeUpdate(); //반환값은 데이터처리 건수.
+				if(r==1) {
+					return true; //boolean 이니까
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}finally {
+				try {
+					if(rs != null)
+						rs.close();
+					if(psmt !=null)
+						psmt.close();
+					if(conn !=null)
+						conn.close();
+					
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+			return false;
+		} //modMem
+		
+		
 	}
