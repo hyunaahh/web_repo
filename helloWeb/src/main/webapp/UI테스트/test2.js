@@ -40,15 +40,19 @@ let novemberCal = {
 	
 
 	
-	makeCal(){
-		let mc = '<table border ="1">';
-		mc += [1].reduce((acc, item) => acc+ this.makeHead()+ this.makeBody(),'');
-		mc += '</table>'
-		this.table = mc;
-	},
+//	makeCal(){
+//		let mc = '<table border ="1">';
+//		mc += [1].reduce((acc, item) => acc+ this.makeHead()+ this.makeBody(),'');
+//		mc += '</table>'
+//		this.table = mc;
+//	},
 	
 	show(){
-		document.getElementById('cal').innerHTML = this.table;
+		let makeHead = this.makeHead();
+		let makeBody = this.makeBody();
+		let table = '<table border ="1">' + makeHead + makeBody + '</table>';
+		document.getElementById('cal').innerHTML = table;
+	
 	}
 	
 } //nC
