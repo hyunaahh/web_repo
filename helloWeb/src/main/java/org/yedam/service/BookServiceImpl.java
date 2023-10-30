@@ -30,7 +30,8 @@ public class BookServiceImpl implements BookService {
 				vo.setTitle(rs.getString("book_title"));
 				vo.setAuthor(rs.getString("book_author"));
 				vo.setPress(rs.getString("book_press"));
-				vo.setPrice(rs.getString("book_price"));
+				vo.setPrice(rs.getInt("book_price"));
+				list.add(vo);
 			}
 		}catch(SQLException e) {
 			e.printStackTrace();

@@ -14,6 +14,9 @@ import org.yedam.service.BookService;
 import org.yedam.service.BookServiceImpl;
 import org.yedam.service.BookVO;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+
 /**
  * Servlet implementation class BookListServlet
  */
@@ -37,23 +40,27 @@ public class BookListServlet extends HttpServlet {
 		List<BookVO> list = svc.bookList();
 		response.setContentType("text/json;charset=utf-8");
 		PrintWriter out = response.getWriter();
-		String str = "[";
-		int cnt = 0;
-		for(BookVO vo : list) {
-			str += "{";
-			str += "\"code\":\"" + vo.getCode() + "\",";
-			str += "\"title\":\"" + vo.getTitle() + "\",";
-			str += "\"author\":\"" + vo.getAuthor() + "\",";
-			str += "\"press\":\"" + vo.getPress() + "\",";
-			str += "\"price\":\"" + vo.getPrice() + "\"";
-			str += "}";
-			
-			if(++cnt != list.size()) {
-				str += ",";
-			}
-		}
-		 str = "]";
-		 out.print(str);
+		
+		Gson gson = new GsonBuilder().create();
+		String json = gson.toJson(list);
+		out.print(json);
+//		String str = "[";
+//		int cnt = 0;
+//		for(BookVO vo : list) {
+//			str += "{";
+//			str += "\"code\":\"" + vo.getCode() + "\",";
+//			str += "\"title\":\"" + vo.getTitle() + "\",";
+//			str += "\"author\":\"" + vo.getAuthor() + "\",";
+//			str += "\"press\":\"" + vo.getPress() + "\",";
+//			str += "\"price\":\"" + vo.getPrice() + "\"";
+//			str += "}";
+//			
+//			if(++cnt != list.size()) {
+//				str += ",";
+//			}
+//		}
+//		 str = "]";
+//		 out.print(str);
 	} //doget
 
 	/**

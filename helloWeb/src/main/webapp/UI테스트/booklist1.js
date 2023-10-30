@@ -8,9 +8,9 @@ xhtp.send();
 
 xhtp.onload = loadJson;
 function loadJson(){
-		console.log(xhtp.responseText);
+		//console.log(xhtp.responseText);
 	let jParse = JSON.parse(xhtp.responseText);
-		console.log(jParse);
+		//console.log(jParse);
 		
 	let titleArr = ["도서코드", "도서명", "저자", "출판사", "가격"];
 	let dataArr =[];

@@ -6,7 +6,7 @@ public class BookVO {
 	private String title;
 	private String author;
 	private String press;
-	private String price;
+	private int price;
 	
 	
 	public String getCode() {
@@ -33,10 +33,10 @@ public class BookVO {
 	public void setPress(String press) {
 		this.press = press;
 	}
-	public String getPrice() {
+	public int getPrice() {
 		return price;
 	}
-	public void setPrice(String number) {
+	public void setPrice(int price) {
 		this.price = price;
 	}
 }

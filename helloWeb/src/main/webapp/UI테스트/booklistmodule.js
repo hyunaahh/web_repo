@@ -26,7 +26,7 @@ const table = {
 	},
 	
 	makeTr(book=[]){
-		let mt = "<tr>"
+		let mt = '<tr>'
 		for(let prop in book){
 			mt += '<td>' + book[prop] + '</td>'
 		}
