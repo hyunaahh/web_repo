@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="UTF-8">
+	<title>fetch.html</title>
+	<script type = "module" src = "fetch1.js"></script>  
+</head>
+
+<body>
+	<div id="show"></div>
+	
+	<script>
+		
+		//promise : 매개값으로 함수 받음 => '비동기방식'으로 처리하기 위해서 사용. 순차적으로 아래로 진행됨. → fullfilled, pending, rejected
+		const promise = new Promise(function (resolve){
+			//setTimeout(함수 , 몇 밀리세컨드있다가할지)
+			setTimeout(function(){
+				console.log("실행");
+				resolve('Success'); //
+			}, 500);
+		}); 
+		
+		//promise객체가 정상적으로 처리됐을 경우 => then이라고 정의된 값으로 'Success'라는 값을 전달하겠다.
+		promise
+			.then((resolve)=>{
+			console.log('then : ', resolve);
+			return 'OK'; //promise(객체)타입으로 반환.
+		})
+		
+			.then((result)=>{
+			console.log('2then: ', result);
+			return message; //얘는 정의x catch 실행되는거 보려고.
+			}) //성공하면
+			
+			.catch((err)=>{
+				console.log('err : ', err);
+			}) //어디서든 잘못된 처리가 발생하면 실행되는 catch
+		
+	</script>
+</body>
+
+</html>
