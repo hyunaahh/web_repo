@@ -10,7 +10,7 @@ public class StudentServiceImpl implements StudentService {
 	@Override
 	public boolean addStudent(StudentVO vo) {
 		
-		return dao.insert(vo) == 1;
+		return dao.insert(vo) == 1; //면 트루! 
 	}
 
 	@Override

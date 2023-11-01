@@ -58,16 +58,16 @@ public class StudentDao {
 	} // insert
 	
 	public int update(StudentVO vo) {
-		String sql = "update student set student_id=?, student_password=?, student_dept=?, student_birthday=?";
+		String sql = "update student set student_name=?, student_password=?, student_dept=?, student_birthday=? where student_id=?";
 		conn = ds.getConnection();
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 		try {
 			psmt = conn.prepareStatement(sql);
-			psmt.setString(1, vo.getStudentId());
-			psmt.setString(2, vo.getStudentName());
-			psmt.setString(3, vo.getStudentPassword());
-			psmt.setString(4, vo.getStudentDept());
-			psmt.setString(5, sdf.format(vo.getStudentBirthday()));
+			psmt.setString(5, vo.getStudentId());
+			psmt.setString(1, vo.getStudentName());
+			psmt.setString(2, vo.getStudentPassword());
+			psmt.setString(3, vo.getStudentDept());
+			psmt.setString(4, sdf.format(vo.getStudentBirthday()));
 			int r = psmt.executeUpdate();
 			return r;
 		}catch(SQLException e) {
@@ -88,7 +88,7 @@ public class StudentDao {
 			psmt.setString(1, sid);
 			int r = psmt.executeUpdate();
 			return r;
-			//return r;
+			
 		}catch(SQLException e) {
 			e.printStackTrace();
 		}finally {
@@ -103,14 +103,12 @@ public class StudentDao {
 		String sql = "select * from student";
 		ResultSet rs;
 		conn = ds.getConnection();
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 		try {
-			
 			psmt = conn.prepareStatement(sql);
 			rs = psmt.executeQuery();
-			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 			while(rs.next()) {
-				vo = new StudentVO(); //** 초기화
-				
+				vo = new StudentVO(); 
 				vo.setStudentId(rs.getString("student_id"));
 				vo.setStudentName(rs.getString("student_name"));
 				vo.setStudentPassword(rs.getString("student_password"));
@@ -118,7 +116,6 @@ public class StudentDao {
 				vo.setStudentBirthday(rs.getDate("student_birthday"));
 				list.add(vo);
 			}
-
 		}catch(SQLException e) {
 			e.printStackTrace();
 		}finally {
@@ -132,18 +129,19 @@ public class StudentDao {
 		String sql = "select * from student where student_id=?";
 		ResultSet rs;
 		conn = ds.getConnection();
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 		try {
-			vo = new StudentVO();
 			psmt = conn.prepareStatement(sql);
 			psmt.setString(1, vo.getStudentId());
 			rs = psmt.executeQuery();
-			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 			if(rs.next()) {
+				vo = new StudentVO();
 				vo.setStudentId(rs.getString("student_id"));
 				vo.setStudentName(rs.getString("student_name"));
 				vo.setStudentPassword(rs.getString("student_password"));
 				vo.setStudentDept(rs.getString("student_dept"));
 				vo.setStudentBirthday(rs.getDate("student_birthday"));
+				rs.close();
 			}
 			
 		}catch(SQLException e) {
