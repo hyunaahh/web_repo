@@ -94,8 +94,18 @@ function genTable(rawData = [], page = 1) {
 	let totalCnt = rawData.length;
 	let lastPage = Math.ceil(totalCnt / 5); //올림. 마지막페이지
 	
-	let endPage = Math.ceil(page/5)*5 //현재페이지기준 마지막페이지
-	let beginPage = endPage-4;
+		//let endPage = Math.ceil(page/5)*5 //현재페이지기준 마지막페이지
+		//let beginPage = endPage-4;
+	
+	//숙제1!!! : 누른게 가운데 오도록.. .
+	let beginPage = page-2;
+	//이러니까 1,2페이지에 마이너스나옴..
+	if(beginPage < 3){
+		beginPage = 1
+	}
+	let endPage = beginPage + 4;
+	
+	
 	
 	let prevPage =false, nextPage=false;
 	
