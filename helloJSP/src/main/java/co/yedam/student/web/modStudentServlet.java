@@ -34,13 +34,13 @@ public class modStudentServlet extends HttpServlet{
 		StudentVO vo = new StudentVO();
 		
 		//파라미터
-		//String id = req.getParameter("id");
+		String id = req.getParameter("id");
 		String name = req.getParameter("name");
 		String pwd = req.getParameter("password");
-		String btd = req.getParameter("btd");
+		String btd = req.getParameter("birthday");
 		System.out.println(name+"&"+pwd+"&"+btd);
 		
-		//vo.setStudentId(id);
+		vo.setStudentId(id);
 		vo.setStudentName(name);
 		vo.setStudentPassword(pwd);
 		try {

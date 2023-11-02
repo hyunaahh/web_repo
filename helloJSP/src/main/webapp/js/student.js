@@ -50,7 +50,7 @@ function addCallback(e) {
 			console.log(result);
 			if (result.retCode == "OK") {
 				alert("추가 성공");
-				let tr = makeTr({ studentId: sid, studentName: sname,studentDept: sdept, studentBirth: sbirth });
+				let tr = makeTr({ studentId: sid, studentName: sname, studentDept: sdept, studentBirth: sbirth });
 				document.querySelector('#list').append(tr);
 			} else {
 				alert("추가 실패");
@@ -67,9 +67,9 @@ function modifyCallback(e){
 	let sname = document.querySelector('.modal-body input[name=name]').value;
 	//or document.querySelector('#sname').value
 	let spwd = document.querySelector('.modal-body input[name=pass]').value;
-	let sbirthday = document.querySelector('.modal-body input[name=birth]').value;
+	let sbirth = document.querySelector('.modal-body input[name=birth]').value;
 	
-	let param = `id=${id}&password=${password}&name=${name}&birthday=${btd}`
+	let param = `id=${id}&password=${spwd}&name=${sname}&birthday=${sbirth}}`
 
 
 	//수정은 post방식으로 하기.
@@ -82,7 +82,7 @@ function modifyCallback(e){
 	.then(result => {
 		if(result.retCode == "OK"){
 			alert("수정 성공")
-			result.vo.studentId; //콘솔로 찍어봐바..
+			console.log(result.vo.studentId); //콘솔로 찍어봐바..
 			let targetTr = document.querySelector('tr[data-sid='+result.vo.studentId+']') //tr의 속성 중에 data-sid의 값
 			let newTr = makeTr(result.vo); //옛날 tr을 새로운 tr로 바꿔주겠음 => replaceChild
 			 // replaceChild : 부모요소에서 자식요소를 바꿀때. targetTr 부모 : tbody
@@ -93,7 +93,7 @@ function modifyCallback(e){
 			alert("수정 실패")
 		}
 	})
-	.catch(err => console.log('error :', err));
+	.catch(err => console.log('error :', err)));
 	
 } //modifycallback
 
@@ -107,12 +107,10 @@ function makeTr(obj) {
 	tr.addEventListener('dblclick', showModal);
 	
 	
-
 	for (let prop of showFields) {
 		let td = document.createElement('td');
 		td.innerHTML = obj[prop];
 		tr.append(td);
-
 	}
 
 	//삭제버튼 만들기
