@@ -3,81 +3,98 @@
 
 <head>
 	<meta charset="UTF-8">
-	<title>student/studentInfo.html</title>
+	<title>/student/studentInfo.html</title>
+	<link rel="stylesheet" href="../css/mystyle.css">
 </head>
 
 <body>
-	<div id="show">
+	<h3>학생정보입력</h3>
+	<div>
 		<table border="1">
 			<thead>
 				<tr>
 					<th>아이디</th>
-					<th>이름</th>
-					<th>생년월일</th>
-					<th>삭제</th>
+					<td><input type="text" id="sid" name="sid" value="std1"></td>
 				</tr>
-			</thead>
-			<tbody id = "list">
-			</tbody>
-		</table>
-		
-	</div>
-	<script>
-		//페이지 로딩되면서 바로 실행
-		fetch('../studentList.do') //호출
-		.then(resolve=>resolve.json()) //studentlist json포맷으로
-		.then(result => {
-			console.log(result); //result 배열임.
-			let tbody = document.querySelector('#list');
-			
-			result.forEach(student => {
-				tbody.append(makeTr(student));
-			})
-		})
-		.catch(err => console.log('error =>', err))
-		
-		function makeTr(obj){
-			let showFields = ['studentId', 'studentName', 'studentBirthday']
-			let tr = document.createElement('tr');
+				<tr>
+					<th>이름</th>
+					<td><input type="text" id="sname" name="name" value="김민수"><br></td>
+				</tr>
+				<tr>
+					<th>비밀번호</th>
+					<td><input type="password" id="spwd" name="pwd" value="1234"><br></td>
+				</tr>
+				<tr>
+					<th>전공</th>
+					<td>
+						<select id="sdept">
+							<option disabled>선택하세요</option>
+							<option value="경영학과">경영학과</option>
+							<option value="영문학과">영문학과</option>
+							<option value="컴퓨터공학과">컴퓨터공학과</option>
+							<option value="서양학과">서양학과</option>
+						</select>
+					</td>
+				</tr>
+				<tr>
+					<th>생년월일</th>
+					<td><input type="date" id="sbtd" name="studentBirthday" value="1994-03-14"><br></td>
+				</tr>
+				<tr>
+					<th>등록</th>
+					<td><button id="addBtn">등록</button></td>
+				</tr>
 
-		 	for(let prop of showFields){
-				 let td = document.createElement('td');
-				 td.innerHTML = obj[prop];
-				 tr.append(td);
+			</thead>
+
+		</table>
+
+		<hr>
+
+		<div id="show">
+			<table border="1">
+				<thead>
+					<tr>
+						<th>아이디</th>
+						<th>이름</th>
+						<th>생년월일</th>
+						<th>삭제</th>
+					</tr>
+				</thead>
+				<tbody id="list">
+				</tbody>
+			</table>
+
+
+
+		</div>
+		
+		<!-- The Modal -->
+		<div id="myModal" class="modal">
+
+			<!-- Modal content -->
+			<div class="modal-content">
+				<div class="modal-header">
+					<span class="close">&times;</span>
+					<h2>Modal Header</h2>
+				</div>
+				<div class="modal-body">
+					<input type="hidden" name="sid">
+					<p>비밀번호<input type="text" name="pass"></p>
+					<p>이름<input type="text" name="name"></p>
+					<p>생년월일<input type="date" name="birth"></p>
 				
-			 }
-			 
-			 //삭제버튼 만들기
-			  let td = document.createElement('td');
-			  let btn = document.createElement('button');
-			  btn.setAttribute('data-sid', obj.studentId);
-			  btn.innerHTML = '삭제'; // *버튼은 라벨 필요함! 
-			  btn.addEventListener('click', function(e){
-				  //ajax호출(버튼 클릭해야지) : 서버에 정보넘겨주고 처리한다는 의미 => servlet 실행! 
-				  fetch('../delStudent.do?sid='+obj.studentId)
-				  .then(resolve => resolve.json())
-				  .then(result => {
-					  console.log(result)
-					  if(result.retCode == "Ok"){
-						  alert("삭제성공");
-						  tr.remove();
-					  }else{
-						  alert("삭제실패");
-					  }
-				  })
-				  .catch(err=>console.log('error :', err));
-			  })
-			  td.append(btn);
-			  tr.append(td);
-			 
-			return tr;
-		}//maketr
+
+				</div>
+				<div class="modal-footer">
+					<h3>Modal Footer</h3>
+					<button id="modBtn">수정</button>
+				</div>
+			</div>
+
+		</div>
 		
-		
-		
-		
-		
-	</script>
+		<script src="../js/student.js"></script>
 </body>
 
 </html>

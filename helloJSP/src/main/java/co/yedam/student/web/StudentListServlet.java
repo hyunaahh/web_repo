@@ -36,6 +36,7 @@ public class StudentListServlet extends HttpServlet {
 
 	@Override
 	protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		//값 볼려고 넣어주는거.
 		Enumeration<String> enumer = req.getHeaderNames();
 		while(enumer.hasMoreElements()) {
 			String header = enumer.nextElement();
@@ -60,7 +61,9 @@ public class StudentListServlet extends HttpServlet {
 		StudentService svc = new StudentServiceImpl();
 		List<StudentVO> list = svc.listStudent();
 		//자바 객체를 json 문자열로 변경하기.
-		Gson gson = new GsonBuilder().create();
+		Gson gson = new GsonBuilder()
+				.setDateFormat("yyyy-MM-dd") //날짜형식 바꾸려면
+				.create();
 		String json = gson.toJson(list); // list라는 자바객체를 json 문자열로 바꿔줍니당...
 		
 

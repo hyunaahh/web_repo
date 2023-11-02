@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
@@ -40,6 +41,7 @@ public class StudentDao {
 		// Date -> STring : sdf.format()
 		// STring => date : sdf.parse();
 			//System.out.println(sdf.format(vo.getStudentBirthday()));
+		
 		try {
 			psmt = conn.prepareStatement(sql);
 			psmt.setString(1, vo.getStudentId());
@@ -58,7 +60,8 @@ public class StudentDao {
 	} // insert
 	
 	public int update(StudentVO vo) {
-		String sql = "update student set student_name=?, student_password=?, student_dept=?, student_birthday=? where student_id=?";
+		//nvl : dept값이 null이면 원래 있던 student_dept값으로 값을 그대로 두겠음.)
+		String sql = "update student set student_name=?, student_password=?, student_dept=nvl(?,student_dept), student_birthday=? where student_id=?";
 		conn = ds.getConnection();
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 		try {
@@ -132,7 +135,7 @@ public class StudentDao {
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 		try {
 			psmt = conn.prepareStatement(sql);
-			psmt.setString(1, vo.getStudentId());
+			psmt.setString(1, sid);
 			rs = psmt.executeQuery();
 			if(rs.next()) {
 				vo = new StudentVO();
@@ -140,7 +143,12 @@ public class StudentDao {
 				vo.setStudentName(rs.getString("student_name"));
 				vo.setStudentPassword(rs.getString("student_password"));
 				vo.setStudentDept(rs.getString("student_dept"));
-				vo.setStudentBirthday(rs.getDate("student_birthday"));
+				try {
+					vo.setStudentBirthday(sdf.parse(rs.getString("student_birthday")));
+				} catch (ParseException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 				rs.close();
 			}
 			
@@ -151,6 +159,9 @@ public class StudentDao {
 		}
 		return vo;
 	} //select
+
+
+
 	
 
 	
