@@ -50,7 +50,7 @@ public class StudentDao {
 			psmt.setString(4, vo.getStudentDept());
 			psmt.setString(5, sdf.format(vo.getStudentBirthday()));
 			int r = psmt.executeUpdate();
-			
+			 
 		}catch(SQLException e) {
 			e.printStackTrace();
 		}finally {

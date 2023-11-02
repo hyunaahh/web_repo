@@ -25,9 +25,12 @@ public class modStudentServlet extends HttpServlet{
 	
 	@Override
 	protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		req.setCharacterEncoding("utf-8"); 
+		resp.setCharacterEncoding("UTF-8");
+		resp.setContentType("text/json; charset=UTF-8");
+		
 		SimpleDateFormat sdf = new SimpleDateFormat();
 		StudentService svc = new StudentServiceImpl();
-		req.setCharacterEncoding("utf-8"); 
 		StudentVO vo = new StudentVO();
 		
 		//파라미터
@@ -47,16 +50,22 @@ public class modStudentServlet extends HttpServlet{
 			e.printStackTrace();
 		}
 		
+		
+		Map<String, Object> map = new HashMap<>();
+		
+		if (svc.editStudent(vo)) {
+			map.put("retCode", "OK");
+			map.put("vo", vo);
+		} else {
+			map.put("retCode", "NG");
+			map.put("vo", vo);
+		}
+		
 		Gson gson = new GsonBuilder()
 				.setDateFormat("yyy-MM-dd")
 				.create();
-		
-		if(svc.editStudent(vo)) {
-			resp.getWriter().print("{\"retCode\" : \"OK\"}");
-		}else {
-			resp.getWriter().print("{\"retCode\" : \"NG\"} ");
-		}
-				
+		PrintWriter out = resp.getWriter();
+		out.println(json);
 	}
 
 }

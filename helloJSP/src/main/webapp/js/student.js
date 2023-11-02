@@ -30,10 +30,10 @@ function addCallback(e) {
 	//or document.querySelector('#sname').value
 	let spwd = document.querySelector('#spwd').value;
 	let sdept = document.querySelector('#sdept').value;
-	let sbtd = document.querySelector('#sbtd').value;
+	let sbirth = document.querySelector('#sbirth').value;
 
 	//`파라메터이름 = ${변수명}`
-	let param = `id=${sid}&name=${sname}&password=${spwd}&dept=${sdept}&btd=${sbtd}`
+	let param = `id=${sid}&name=${sname}&password=${spwd}&dept=${sdept}&btd=${sbirth}`
 	console.log(param);
 
 	//(1번) fetch('../addStudent.do?' + param) => 
@@ -49,11 +49,11 @@ function addCallback(e) {
 		.then(result => {
 			console.log(result);
 			if (result.retCode == "OK") {
-				alert("성공");
-				let tr = makeTr({ studentId: sid, studentName: sname, studentBirth: sbtd });
+				alert("추가 성공");
+				let tr = makeTr({ studentId: sid, studentName: sname,studentDept: sdept, studentBirth: sbirth });
 				document.querySelector('#list').append(tr);
 			} else {
-				alert("실패");
+				alert("추가 실패");
 			}
 		})
 		.catch(err => console.log('error =>', err))
@@ -63,16 +63,17 @@ function addCallback(e) {
 function modifyCallback(e){
 	//여기를 모듈창에서 바꿨던 data로 가져와야함..! 
 	//let id = document.querySelector('input[name=sid]').value;
-	let id = document.querySelector('.modal-body.input[name]=sid').value;
-	let name = document.querySelector('.modal-body.input[name]=sname').value;
+	let sid = document.querySelector('.modal-body input[name=sid]').value;
+	let sname = document.querySelector('.modal-body input[name=name]').value;
 	//or document.querySelector('#sname').value
-	let password = document.querySelector('.modal-body.input[name]=spwd').value;
-	let btd = document.querySelector('#sbtd').value;
+	let spwd = document.querySelector('.modal-body input[name=pass]').value;
+	let sbirthday = document.querySelector('.modal-body input[name=birth]').value;
+	
 	let param = `id=${id}&password=${password}&name=${name}&birthday=${btd}`
 
 
 	//수정은 post방식으로 하기.
-	fetch('../editStudent.do?id='),{
+	fetch('../editStudent.do?id=', {
 		method: 'post',
 		headers: {'Content-Type': 'application/x-www-form-urlencoded'},
 		body : param
@@ -80,7 +81,7 @@ function modifyCallback(e){
 	.then(resolve => resolve.json())
 	.then(result => {
 		if(result.retCode == "OK"){
-			alert("성공")
+			alert("수정 성공")
 			result.vo.studentId; //콘솔로 찍어봐바..
 			let targetTr = document.querySelector('tr[data-sid='+result.vo.studentId+']') //tr의 속성 중에 data-sid의 값
 			let newTr = makeTr(result.vo); //옛날 tr을 새로운 tr로 바꿔주겠음 => replaceChild
@@ -89,7 +90,7 @@ function modifyCallback(e){
 			parentElem.replaceChild(newTr, targetTr);
 			document.getElementById("myModal").style.display = 'none';
 		}else{
-			alert("실패")
+			alert("수정 실패")
 		}
 	})
 	.catch(err => console.log('error :', err));
@@ -101,8 +102,8 @@ function makeTr(obj) {
 	let showFields = ['studentId', 'studentName', 'studentBirthday']
 	let tr = document.createElement('tr');
 	tr.setAttribute('data-sid', obj.studentId); //tr을 생성하면서 sid라는 값을 담아놓음.
-	tr.setAttribute('data-pwd', obj.studentPassword)
-	tr.setAttribute('data-btd', obj.studentBirthday)
+	//tr.setAttribute('data-pwd', obj.studentPassword)
+	//tr.setAttribute('data-btd', obj.studentBirthday)
 	tr.addEventListener('dblclick', showModal);
 	
 	
@@ -151,7 +152,13 @@ function showModal(e) {
 	
 	console.log(id); //id 기준으로 데이터조회 가능함! 
 	
-	fetch('../getStudent.do?id='+id)
+	
+//	   	fetch('../studentGet.do?', {
+//        method: 'post',
+//        headers: {'Content-Type': 'application/x-www-form-urlencoded' },
+//        body: 'id=' + id
+//    	})
+	fetch('../getStudent.do?id='+ id)
 	.then(resolve => resolve.json())
 	.then(result => {
 		if(result.retCode == "OK"){
