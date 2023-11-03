@@ -251,7 +251,7 @@ function showModal(e) {
 
 
 	//한건조회하기
-	svc.getStudent(obj.studentId,
+	svc.getStudent(id,
 		result => {
 			if (result.retCode == "OK") {
 				modal.querySelector("input[name=sid]").value = result.vo.studentId;
