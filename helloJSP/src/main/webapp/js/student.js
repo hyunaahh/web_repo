@@ -123,11 +123,16 @@ function modifyCallback(e) {
 	//or document.querySelector('#sname').value
 	let spwd = document.querySelector('.modal-body input[name=pass]').value;
 	let sbirth = document.querySelector('.modal-body input[name=birth]').value;
+<<<<<<< HEAD
 
+=======
+	
+>>>>>>> branch 'master' of https://github.com/hyunaahh/web_repo.git
 	let param = `id=${id}&password=${spwd}&name=${sname}&birthday=${sbirth}}`
 
 
 	//수정은 post방식으로 하기.
+<<<<<<< HEAD
 	svc.editStudent(
 		//첫번째 파라미터
 		{
@@ -159,7 +164,28 @@ function modifyCallback(e) {
 			method: 'post',
 			headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
 			body: param
+=======
+	fetch('../editStudent.do?id=', {
+		method: 'post',
+		headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+		body : param
+	}
+	.then(resolve => resolve.json())
+	.then(result => {
+		if(result.retCode == "OK"){
+			alert("수정 성공")
+			console.log(result.vo.studentId); //콘솔로 찍어봐바..
+			let targetTr = document.querySelector('tr[data-sid='+result.vo.studentId+']') //tr의 속성 중에 data-sid의 값
+			let newTr = makeTr(result.vo); //옛날 tr을 새로운 tr로 바꿔주겠음 => replaceChild
+			 // replaceChild : 부모요소에서 자식요소를 바꿀때. targetTr 부모 : tbody
+			let parentElem = document.querySelector('#list');
+			parentElem.replaceChild(newTr, targetTr);
+			document.getElementById("myModal").style.display = 'none';
+		}else{
+			alert("수정 실패")
+>>>>>>> branch 'master' of https://github.com/hyunaahh/web_repo.git
 		}
+<<<<<<< HEAD
 			.then(resolve => resolve.json())
 			.then(result => {
 				if (result.retCode == "OK") {
@@ -178,6 +204,11 @@ function modifyCallback(e) {
 			.catch(err => console.log('error :', err)));
 	*/
 
+=======
+	})
+	.catch(err => console.log('error :', err)));
+	
+>>>>>>> branch 'master' of https://github.com/hyunaahh/web_repo.git
 } //modifycallback
 
 //makeTr함수
@@ -188,8 +219,13 @@ function makeTr(obj) {
 	//tr.setAttribute('data-pwd', obj.studentPassword)
 	//tr.setAttribute('data-btd', obj.studentBirthday)
 	tr.addEventListener('dblclick', showModal);
+<<<<<<< HEAD
 
 
+=======
+	
+	
+>>>>>>> branch 'master' of https://github.com/hyunaahh/web_repo.git
 	for (let prop of showFields) {
 		let td = document.createElement('td');
 		td.innerHTML = obj[prop];
@@ -281,6 +317,7 @@ function showModal(e) {
 					modal.querySelector("input[name=name]").value = result.vo.studentName;
 					modal.querySelector("input[name=birth]").value = result.vo.studentBirthday;
 	
+<<<<<<< HEAD
 				} else {
 					alert("실패")
 				}
@@ -288,6 +325,30 @@ function showModal(e) {
 			.catch(err => console.log('error :', err));
 	*/
 
+=======
+	
+//	   	fetch('../studentGet.do?', {
+//        method: 'post',
+//        headers: {'Content-Type': 'application/x-www-form-urlencoded' },
+//        body: 'id=' + id
+//    	})
+	fetch('../getStudent.do?id='+ id)
+	.then(resolve => resolve.json())
+	.then(result => {
+		if(result.retCode == "OK"){
+			modal.querySelector("input[name=sid]").value = result.vo.studentId;
+			modal.querySelector("input[name=pass]").value = result.vo.studentPassword;
+			modal.querySelector("input[name=name]").value = result.vo.studentName;
+			modal.querySelector("input[name=birth]").value = result.vo.studentBirthday;
+			
+		}else{
+			alert("실패")
+		}
+	})
+	.catch(err => console.log('error :', err));
+	
+	
+>>>>>>> branch 'master' of https://github.com/hyunaahh/web_repo.git
 	// Get the modal
 	var modal = document.getElementById("myModal");
 	modal.style.display = "block"

@@ -67,10 +67,14 @@ public class modStudentServlet extends HttpServlet{
 		Gson gson = new GsonBuilder()
 				.setDateFormat("yyy-MM-dd")
 				.create();
+		
 		String json = gson.toJson(map);
 		PrintWriter out = resp.getWriter();
 		
+
+	
 		out.println(json);
+
 	}
 
 }
