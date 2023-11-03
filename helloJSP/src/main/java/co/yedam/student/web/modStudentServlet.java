@@ -1,8 +1,11 @@
 package co.yedam.student.web;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.HashMap;
+import java.util.Map;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -25,19 +28,22 @@ public class modStudentServlet extends HttpServlet{
 	
 	@Override
 	protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		req.setCharacterEncoding("utf-8"); 
+		resp.setCharacterEncoding("UTF-8");
+		resp.setContentType("text/json; charset=UTF-8");
+		
 		SimpleDateFormat sdf = new SimpleDateFormat();
 		StudentService svc = new StudentServiceImpl();
-		req.setCharacterEncoding("utf-8"); 
 		StudentVO vo = new StudentVO();
 		
 		//파라미터
-		//String id = req.getParameter("id");
+		String id = req.getParameter("id");
 		String name = req.getParameter("name");
 		String pwd = req.getParameter("password");
-		String btd = req.getParameter("btd");
+		String btd = req.getParameter("birthday");
 		System.out.println(name+"&"+pwd+"&"+btd);
 		
-		//vo.setStudentId(id);
+		vo.setStudentId(id);
 		vo.setStudentName(name);
 		vo.setStudentPassword(pwd);
 		try {
@@ -47,16 +53,24 @@ public class modStudentServlet extends HttpServlet{
 			e.printStackTrace();
 		}
 		
+		
+		Map<String, Object> map = new HashMap<>();
+		
+		if (svc.editStudent(vo)) {
+			map.put("retCode", "OK");
+			map.put("vo", vo);
+		} else {
+			map.put("retCode", "NG");
+			map.put("vo", vo);
+		}
+		
 		Gson gson = new GsonBuilder()
 				.setDateFormat("yyy-MM-dd")
 				.create();
+		String json = gson.toJson(map);
+		PrintWriter out = resp.getWriter();
 		
-		if(svc.editStudent(vo)) {
-			resp.getWriter().print("{\"retCode\" : \"OK\"}");
-		}else {
-			resp.getWriter().print("{\"retCode\" : \"NG\"} ");
-		}
-				
+		out.println(json);
 	}
 
 }
