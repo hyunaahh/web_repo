@@ -9,6 +9,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import co.yedam.board.web.AddBoardControl;
+import co.yedam.board.web.BoardFormControl;
 import co.yedam.board.web.BoardListControl;
 import co.yedam.board.web.GetBoardControl;
 
@@ -21,8 +23,10 @@ public class FrontController extends HttpServlet {
 	// init -> service
 	@Override
 	public void init() throws ServletException {
-		map.put("/boardList.do", new BoardListControl());
-		map.put("/getBoard.do", new GetBoardControl());
+		map.put("/boardList.do", new BoardListControl()); //목록
+		map.put("/getBoard.do", new GetBoardControl()); //조회
+		map.put("/boardForm.do", new BoardFormControl()); //등록 - 화면만 열어줌
+		map.put("/addBoard.do", new AddBoardControl()); //처리 - 등록한걸 처리하기.
 	}
 
 	@Override

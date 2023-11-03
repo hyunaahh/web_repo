@@ -95,20 +95,17 @@ public class BoardDAO {
 	}
 
 	public int insert(BoardVO vo) {
-		String sql = "insert into board(board_no, title, content, author, write_date, view_cnt, image, last_update) values (?,?,?,?,?,?,nvl(?, image),?)";
+		String sql = "insert into board(board_no, title, content, author) values (seq_board.nextval,?,?,?)";
 		
 		conn = ds.getConnection();
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 		try {
 			psmt = conn.prepareStatement(sql);
-			psmt.setInt(1, vo.getBoardNo());
-			psmt.setString(2, vo.getTitle());
-			psmt.setString(3, vo.getContent());
-			psmt.setString(4, vo.getAuthor());
-			psmt.setString(5, sdf.format(vo.getWriteDate()));
-			psmt.setString(6, sdf.format(vo.getViewCnt()));
-			psmt.setString(7, vo.getImage());
-			psmt.setString(8, sdf.format(vo.getLastUpdate()));
+			//psmt.setInt(1, vo.getBoardNo());
+			psmt.setString(1, vo.getTitle());
+			psmt.setString(2, vo.getContent());
+			psmt.setString(3, vo.getAuthor());
+			
 			int r = psmt.executeUpdate();
 			
 		}catch(SQLException e) {
