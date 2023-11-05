@@ -26,10 +26,11 @@ public class AddBoardControl implements Command {
 		vo.setTitle(title);
 		vo.setContent(content);
 		vo.setAuthor(author);
+		
 		BoardService svc = new BoardServiceImpl();
 		if(svc.addBoard(vo)) {
 			try {
-				resp.sendRedirect("boardList.do");
+				resp.sendRedirect("boardList.do"); // 저장하고 등록 추가된 정보 나옴
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();

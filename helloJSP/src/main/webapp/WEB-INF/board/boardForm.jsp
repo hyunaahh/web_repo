@@ -19,7 +19,7 @@
 				<td><input type="text" name="author"></td>
 			</tr>
 			<tr>
-				<td colspan="2"><textarea cols="40" row="5" name="author"></textarea></td>
+				<td colspan="2"><textarea cols="40" rows="5" name="content"></textarea></td>
 			</tr>
 		</table>
 		
