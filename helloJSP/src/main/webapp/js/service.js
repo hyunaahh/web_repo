@@ -27,8 +27,8 @@ export default{
 	
 	
 	//등록 - addcallback 안에 있음.
-	async addStudent(option, successCallback, errorCallback){
-		let req = await fetch("../addStduent.do", option);
+	async addStudent(optObj, successCallback, errorCallback){ 
+		let req = await fetch("../addStudent.do", optObj); // optObj : 사용자가 등록한 데이터.값
 		let json = await req.json();
 		try{
 			successCallback(json) 

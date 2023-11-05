@@ -22,7 +22,7 @@ public class BoardListControl implements Command {
 		BoardService svc = new BoardServiceImpl();
 			List<BoardVO> list = svc.boardList();
 			
-			req.setAttribute("list", list);
+			req.setAttribute("list", list); //list 담아서 boardList.jsp로 보냄.
 			
 			//페이지요청(boardList.do) - > 요청 재지정(board/boardList.jsp)
 			RequestDispatcher rd = req.getRequestDispatcher("WEB-INF/board/boardList.jsp"); //서블릿페이지에ㅓㅅ 어떤 다른페이지로 이동할 정보를 넣어주고, 

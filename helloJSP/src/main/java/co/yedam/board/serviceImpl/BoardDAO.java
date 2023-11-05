@@ -41,9 +41,11 @@ public class BoardDAO {
 		sql = "select * from board order by board_no";
 		conn = ds.getConnection();
 		List<BoardVO> list = new ArrayList<>();
+		
 		try {
 			psmt = conn.prepareStatement(sql);
 			rs = psmt.executeQuery();
+			
 			while (rs.next()) {
 				BoardVO vo = new BoardVO();
 				vo.setBoardNo(rs.getInt("board_no"));
@@ -56,6 +58,7 @@ public class BoardDAO {
 				vo.setViewCnt(rs.getInt("view_cnt"));
 				list.add(vo);
 			}
+			rs.close();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
@@ -84,8 +87,8 @@ public class BoardDAO {
 				vo.setAuthor(rs.getString("author"));
 				vo.setWriteDate(rs.getDate("write_Date"));
 				vo.setViewCnt(rs.getInt("view_cnt"));
-				rs.close();
 			}
+			rs.close();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
@@ -107,7 +110,7 @@ public class BoardDAO {
 			psmt.setString(3, vo.getAuthor());
 			
 			int r = psmt.executeUpdate();
-			
+			return r;
 		}catch(SQLException e) {
 			e.printStackTrace();
 		}finally {
@@ -123,7 +126,7 @@ public class BoardDAO {
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 		int r=0;
 		try {
-			vo = new BoardVO();
+			//vo = new BoardVO();
 			psmt = conn.prepareStatement(sql);
 			psmt.setInt(5, vo.getBoardNo());
 			psmt.setString(1, vo.getTitle());
@@ -131,13 +134,13 @@ public class BoardDAO {
 			psmt.setString(3, vo.getImage());
 			psmt.setString(4, sdf.format(vo.getLastUpdate()));
 			r = psmt.executeUpdate();
-			
+			return r;
 		}catch(SQLException e) {
 			e.printStackTrace();
 		}finally {
 			close();
 		}
-		return r;
+		return 0;
 	}
 
 	
@@ -145,7 +148,7 @@ public class BoardDAO {
 		sql = "delete from board where board_no=?";
 		int r=0;
 		conn = ds.getConnection();
-		BoardVO vo = new BoardVO();
+		//BoardVO vo = new BoardVO();
 		
 		try {
 			psmt = conn.prepareStatement(sql);
@@ -157,7 +160,7 @@ public class BoardDAO {
 		}finally {
 			close();
 		}
-		return r;
+		return 0;
 	
 	}
 	

@@ -12,17 +12,17 @@
 	<h3>게시판목록</h3>
 	<%
 		//Object obj를 List<BoardVO> list로 강제 변환한거임.
-		List<BoardVO> list = (List<BoardVO>) request.getAttribute("list"); // list<BoardVO> list;
+		List<BoardVO> list = (List<BoardVO>) request.getAttribute("list"); // list<BoardVO> list; 전체조회. object타입에 반환.
 	%>
 
 	<table border="1">
 		<thead>
 			<tr>
-				<
+				
 				<th>글번호</th> 
 				<th>제목</th> 
 				<th>작성자</th> 
-				<th>작성자</th>
+				<th>작성일자</th>
 			</tr>
 		</thead>
 		<tbody>
@@ -31,7 +31,7 @@
 			%>
 			<tr>
 				<td><%=vo.getBoardNo() %></td>
-				<td><a href="getBoard.do?bno=<%=vo.getBoardNo()%>"> <%=vo.getTitle() %></td>
+				<td><a href="getBoard.do?bno=<%=vo.getBoardNo()%>"> <%=vo.getTitle() %></a></td>
 				
 				<td><%=vo.getAuthor() %></td>
 				<td><%=vo.getWriteDate() %></td>
