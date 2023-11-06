@@ -8,9 +8,9 @@
 
 
 	<h3>회원목록</h3>
+	
 	<%
-		//Object obj를 List<BoardVO> list로 강제 변환한거임.
-		List<MemberVO> list = (List<MemberVO>) request.getAttribute("list"); // list<BoardVO> list; 전체조회. object타입에 반환.
+		List<MemberVO> list = (List<MemberVO>) request.getAttribute("mlist"); // list<BoardVO> list; 전체조회. object타입에 반환.
 	%>
 
 	<table class = "table">
@@ -20,7 +20,7 @@
 				<th>비밀번호</th> 
 				<th>이름</th> 
 				<th>전화번호</th>
-				<th name = "responsibility">권한</th>
+				<th>권한</th>
 			</tr>
 		</thead>
 		<tbody>

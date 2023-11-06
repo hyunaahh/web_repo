@@ -25,7 +25,7 @@ public class ModifyBoardControl implements Command{
 		String author = req.getParameter("author");
 		String content = req.getParameter("content");
 		String bno = req.getParameter("bno");
-		System.out.println(bno);//bno가 지금 null임.
+		
 		
 		vo = new BoardVO();
 		vo.setTitle(title);

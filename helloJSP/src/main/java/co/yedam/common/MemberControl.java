@@ -9,29 +9,22 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import co.yedam.board.service.MemberService;
+import co.yedam.board.service.BoardService;
 import co.yedam.board.service.MemberVO;
-import co.yedam.board.serviceImpl.MemberServiceImpl;
+import co.yedam.board.serviceImpl.BoardServiceImpl;
 
 public class MemberControl implements Command {
 
 	@Override
 	public void execute(HttpServletRequest req, HttpServletResponse resp) {
-		
-		MemberService svc = new MemberServiceImpl();
-		List<MemberVO> list = svc.memberList();
-		
-		String responsibility = 
-		req.setAttribute("responsiblility", responsibility);
-		System.out.println("list" + list);
-	
-	
-		HttpSession session = req.getSession(); //로그인하면 세션 생김. 세션값은 계속 유지됨.
-		session.setAttribute("responsibility", list);  //나중에 session.getAttribute("logId")해서 가져올 수 있음.
-		
-		RequestDispatcher rd = req.getRequestDispatcher("WEB-INF/board/memberList.do");
+
+		BoardService svc = new BoardServiceImpl();
+		List<MemberVO> mlist = svc.memberList();
+
+		req.setAttribute("list", mlist);
+
 		try {
-			rd.forward(req, resp);
+			req.getRequestDispatcher("WEB-INF/main/memberList.jsp").forward(req, resp);
 		} catch (ServletException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -39,8 +32,7 @@ public class MemberControl implements Command {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-				
 
-	} //execute
+	} // execute
 
 }

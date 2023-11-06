@@ -147,15 +147,15 @@ public class BoardDAO {
 	
 	public int delete(int boardNo) {
 		sql = "delete from board where board_no=?";
-		int r=0;
+		
 		conn = ds.getConnection();
 		//BoardVO vo = new BoardVO();
 		
 		try {
 			psmt = conn.prepareStatement(sql);
 			psmt.setInt(1, boardNo);
-			r = psmt.executeUpdate();
-			
+			int r = psmt.executeUpdate();
+			return r;
 		}catch(SQLException e) {
 			e.printStackTrace();
 		}finally {

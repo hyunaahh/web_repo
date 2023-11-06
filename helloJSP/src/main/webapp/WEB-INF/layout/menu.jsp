@@ -48,10 +48,8 @@
 	                    %>
 	                 
 	                 
-	                 <%if(logId != null && responsibility == "Admin"){ %>   
+	                 <%if(responsibility != null && responsibility.equals("Admin")){ %>   
                     <a class="list-group-item list-group-item-action list-group-item-light p-3" href="memberList.do">회원관리</a>
-                    <% }else{ %>
-                    <a class="list-group-item list-group-item-action list-group-item-light p-3" href="main.do">첫페이지</a>
                     <% } %>
                     
                     <a class="list-group-item list-group-item-action list-group-item-light p-3" href="#!">Events</a>

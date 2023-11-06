@@ -17,24 +17,27 @@ public class RemoveFormControl implements Command {
 	public void execute(HttpServletRequest req, HttpServletResponse resp) {
 		String bno = req.getParameter("bno");
 		
-		System.out.println("remove : "+bno);
+			System.out.println("remove : "+bno);
 		
 		BoardService svc = new BoardServiceImpl();
 		BoardVO vo = svc.getBoard(Integer.parseInt(bno));
 		req.setAttribute("vo", vo);
-		System.out.println("removeFOm vo" + vo);
+			System.out.println("removeFOm vo" + vo);
 		
 		//수정화면오픈
-		try {
-			req.getRequestDispatcher("WEB-INF/board/removeForm.jsp").forward(req, resp);
-		} catch (ServletException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-
+		
+			try {
+				try {
+					req.getRequestDispatcher("WEB-INF/board/removeForm.jsp").forward(req, resp);
+				} catch (ServletException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		
 	}
 
 }

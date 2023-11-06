@@ -11,7 +11,7 @@
 <%
 	BoardVO vo = (BoardVO) request.getAttribute("vo"); // vo에 값 담아줬으니까.
 	%>
-	<% System.out.println("vo" + vo); %>
+	
 	<h3>게시글 삭제 화면</h3>
 	<form action="removeBoard.do" method="post">
 		<input type="hidden" name="bno" value="<%=vo.getBoardNo()%>"> <!-- 아이디값 가져와서 수정하니까 value에 보드넘버로 가져옴. -->
