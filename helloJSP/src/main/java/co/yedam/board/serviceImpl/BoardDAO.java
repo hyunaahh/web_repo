@@ -9,8 +9,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import co.yedam.board.service.BoardVO;
+import co.yedam.board.service.MemberVO;
 import co.yedam.common.DataSource;
-import co.yedam.student.service.StudentVO;
 
 public class BoardDAO {
 
@@ -98,7 +98,7 @@ public class BoardDAO {
 	}
 
 	public int insert(BoardVO vo) {
-		String sql = "insert into board(board_no, title, content, author) values (seq_board.nextval,?,?,?)";
+		String sql = "insert into board(board_no, title, content, author, image) values (seq_board.nextval,?,?,?,?)";
 		
 		conn = ds.getConnection();
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
@@ -108,6 +108,7 @@ public class BoardDAO {
 			psmt.setString(1, vo.getTitle());
 			psmt.setString(2, vo.getContent());
 			psmt.setString(3, vo.getAuthor());
+			psmt.setString(4, vo.getImage());
 			
 			int r = psmt.executeUpdate();
 			return r;
@@ -120,19 +121,19 @@ public class BoardDAO {
 	}
 
 	public int update(BoardVO vo) {
-		sql = "update board set  by title=?, content=?, image=nvl(?, image), last_update=sysdate where board_no=?";
+		sql = "update board set title=?, content=?, image=nvl(?, image), last_update=sysdate where board_no=?";
 		conn = ds.getConnection();
 		
-		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+		
 		int r=0;
 		try {
 			//vo = new BoardVO();
 			psmt = conn.prepareStatement(sql);
-			psmt.setInt(5, vo.getBoardNo());
+			psmt.setInt(4, vo.getBoardNo());
 			psmt.setString(1, vo.getTitle());
 			psmt.setString(2, vo.getContent());
 			psmt.setString(3, vo.getImage());
-			psmt.setString(4, sdf.format(vo.getLastUpdate()));
+			//psmt.setString(4, sdf.format(vo.getLastUpdate()));
 			r = psmt.executeUpdate();
 			return r;
 		}catch(SQLException e) {
@@ -183,6 +184,58 @@ public class BoardDAO {
 		}
 		return 0;
 	}
+	
+	//로그인: 아이디와 비번을 받아서 값이 있는지 없는지 확인 -> 조회값을 boolean으로 받겠..
+	public boolean getUser(String id, String pw) {
+		sql = "SELECT * FROM MEMBER WHERE MID=? AND PASS=?";
+		conn = ds.getConnection();
+		
+		try {
+			psmt = conn.prepareStatement(sql);
+			psmt.setString(1, id);
+			psmt.setString(2, pw);
+			rs = psmt.executeQuery();
+			if(rs.next()) {
+				return true;
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			close();
+		}
+		return false;
+	}
+	
+	//회원 목록 보여주기
+	public List<MemberVO> memberList() {
+		sql = "select * from member";
+		conn = ds.getConnection();
+		List<MemberVO> list = new ArrayList<>();
+		
+		try {
+			psmt = conn.prepareStatement(sql);
+			rs = psmt.executeQuery();
+			
+			while (rs.next()) {
+				MemberVO vo = new MemberVO();
+				vo.setMid(rs.getString("mid"));				
+				vo.setPass(rs.getString("pass"));				
+				vo.setName(rs.getString("name"));				
+				vo.setPhone(rs.getString("phone"));				
+				vo.setResponsibility(rs.getString("responsibility"));				
+				list.add(vo);
+			}
+			rs.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close();
+		}
+		return list;
+
+	}
+	
 	
 	
 }

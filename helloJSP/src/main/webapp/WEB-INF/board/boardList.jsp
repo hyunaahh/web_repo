@@ -2,20 +2,18 @@
 <%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>게시판목록("board/boardList.jsp)</title>
-</head>
-<body>
+	
+<%@include file= "../layout/menu.jsp"%>
+<%@include file= "../layout/header.jsp"%>
+
+
 	<h3>게시판목록</h3>
 	<%
 		//Object obj를 List<BoardVO> list로 강제 변환한거임.
 		List<BoardVO> list = (List<BoardVO>) request.getAttribute("list"); // list<BoardVO> list; 전체조회. object타입에 반환.
 	%>
 
-	<table border="1">
+	<table class = "table">
 		<thead>
 			<tr>
 				
@@ -43,5 +41,5 @@
 	</table>
 	<p><a href="boardForm.do">등록화면</a></p>
 	
-</body>
+<%@include file="../layout/footer.jsp"%>
 </html>

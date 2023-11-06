@@ -21,7 +21,7 @@
 	<a href="firstServlet.do">servlet link</a>
 	
 	<%
-	response.sendRedirect("boardList.do");
+	response.sendRedirect("main.do");
 	%>
 </body>
 </html>

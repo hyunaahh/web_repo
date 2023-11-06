@@ -11,5 +11,11 @@ public interface BoardService {
 	public boolean editBoard(BoardVO vo);
 	public boolean removeBoard(int boardNo);
 
+	//로그인 처리
+	public boolean loginCheck(String id, String pw);
+	
+	
+
+	
 	
 }
