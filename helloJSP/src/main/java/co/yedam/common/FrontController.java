@@ -17,6 +17,8 @@ import co.yedam.board.web.ModifyBoardControl;
 import co.yedam.board.web.ModifyFormControl;
 import co.yedam.board.web.RemoveBoardControl;
 import co.yedam.board.web.RemoveFormControl;
+import co.yedam.reply.web.AddReplyControl;
+import co.yedam.reply.web.ReplyListControl;
 
 
 //url : .do로 끝나면 밑에 애들이 실행되도록 만듦.
@@ -46,6 +48,10 @@ public class FrontController extends HttpServlet {
 		map.put("/modifyBoard.do", new ModifyBoardControl()); //실제 수정 처리하는 곳.
 		map.put("/removeForm.do", new RemoveFormControl()); //삭제 폼화면 
 		map.put("/removeBoard.do", new RemoveBoardControl()); //실제 삭제 처리하는 곳.
+		
+		//댓글목록
+		map.put("/replyList.do", new ReplyListControl());
+		map.put("/addReply.do", new AddReplyControl());
 	}
 
 	@Override

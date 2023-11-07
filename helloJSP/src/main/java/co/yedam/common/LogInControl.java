@@ -20,9 +20,9 @@ public class LogInControl implements Command {
 		
 	
 		BoardService svc = new BoardServiceImpl();
-		MemberVO vo = new MemberVO();
+		MemberVO vo = svc.loginCheck(id, pw);
 		
-		if(svc.loginCheck(id, pw)) {
+		if(vo != null) {
 			
 			//session : 클라이언트가 접속하면 중복되지않는 고유한 세션값 가짐-> 그 값을 유지함.(서버-클라이언트//네트워크:cookie 보기.)
 			HttpSession session = req.getSession(); //로그인하면 세션 생김. 세션값은 계속 유지됨.

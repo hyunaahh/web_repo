@@ -186,7 +186,7 @@ public class BoardDAO {
 	}
 	
 	//로그인: 아이디와 비번을 받아서 값이 있는지 없는지 확인 -> 조회값을 boolean으로 받겠..
-	public boolean getUser(String id, String pw) {
+	public MemberVO getUser(String id, String pw) {
 		sql = "SELECT * FROM MEMBER WHERE MID=? AND PASS=?";
 		conn = ds.getConnection();
 		
@@ -196,7 +196,13 @@ public class BoardDAO {
 			psmt.setString(2, pw);
 			rs = psmt.executeQuery();
 			if(rs.next()) {
-				return true;
+				MemberVO vo = new MemberVO();
+				vo.setMid(rs.getString("mid"));
+				vo.setName(rs.getString("name"));
+				vo.setPass(rs.getString("pass"));
+				vo.setPhone(rs.getString("phone"));
+				vo.setResponsibility(rs.getString("responsibility"));
+				return vo;
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -204,7 +210,7 @@ public class BoardDAO {
 		}finally {
 			close();
 		}
-		return false;
+		return null;
 	}
 	
 	//회원 목록 보여주기

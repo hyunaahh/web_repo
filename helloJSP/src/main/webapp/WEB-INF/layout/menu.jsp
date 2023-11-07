@@ -20,7 +20,7 @@
     	%>
     	
     	<%
-    		String responsibility = (String) session.getAttribute("responsibility");
+    		String responsibility = (String)session.getAttribute("responsibility");
     	%>
         <div class="d-flex" id="wrapper">
         

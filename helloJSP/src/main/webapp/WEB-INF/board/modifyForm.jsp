@@ -8,10 +8,10 @@
 <title>modifyForm.jsp</title>
 </head>
 <body>
+	<h3>게시글 수정 화면</h3>
 	<%
 	BoardVO vo = (BoardVO) request.getAttribute("vo"); // vo에 값 담아줬으니까.
 	%>
-	<h3>게시글 수정 화면</h3>
 	<form action="modifyBoard.do" method="post" > <!-- enctype="multipart/form-data"이거 파일수정안하니까 얘는 빼야지.. -->
 		<input type="hidden" name="bno" value="<%=vo.getBoardNo()%>"> <!-- 아이디값 가져와서 수정하니까 value에 보드넘버로 가져옴. -->
 		<!-- 파일첨부 처리하려면 multipart/form-data  -->
@@ -37,9 +37,6 @@
 					name="img" width="150"></td>
 				<!-- 라이브러리하나활용해서 쓰느 방식으로 go : cos 라이브러리 추가.  -->
 			</tr>
-
-			
-
 
 			<tr>
 				<td colspan="2"><input type="submit" value="수정"> 

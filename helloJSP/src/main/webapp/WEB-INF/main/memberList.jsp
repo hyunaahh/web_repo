@@ -9,9 +9,7 @@
 
 	<h3>회원목록</h3>
 	
-	<%
-		List<MemberVO> list = (List<MemberVO>) request.getAttribute("mlist"); // list<BoardVO> list; 전체조회. object타입에 반환.
-	%>
+
 
 	<table class = "table">
 		<thead>
@@ -24,15 +22,18 @@
 			</tr>
 		</thead>
 		<tbody>
+			<%
+		List<MemberVO> list = (List<MemberVO>) request.getAttribute("list"); // list<BoardVO> list; 전체조회. object타입에 반환.
+	%>
 			<% 
 			for(MemberVO vo : list){ 
 			%>
 			<tr>
-				<td><%=vo.getMid() %></td>
-				<td><%=vo.getPass() %></td>
-				<td><%=vo.getName() %></td>
-				<td><%=vo.getPhone() %></td>
-				<td><%=vo.getResponsibility() %></td>
+				<td><%=vo.getMid()%></td>
+				<td><%=vo.getPass()%></td>
+				<td><%=vo.getName()%></td>
+				<td><%=vo.getPhone()%></td>
+				<td><%=vo.getResponsibility()%></td>
 			</tr>
 			<% 
 			} 

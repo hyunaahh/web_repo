@@ -19,7 +19,7 @@ public class ModifyBoardControl implements Command{
 	public void execute(HttpServletRequest req, HttpServletResponse resp) {
 		
 		//파라메터받아옴 -> 데이터수정 -> 목록이동.
-		BoardVO  vo ;
+	
 		
 		String title = req.getParameter("title");
 		String author = req.getParameter("author");
@@ -27,14 +27,13 @@ public class ModifyBoardControl implements Command{
 		String bno = req.getParameter("bno");
 		
 		
-		vo = new BoardVO();
+		BoardVO vo = new BoardVO();
 		vo.setTitle(title);
 		vo.setAuthor(author);
 		vo.setContent(content);
 		vo.setBoardNo(Integer.parseInt(bno));
 		
-		
-		
+
 		
 		BoardService svc = new BoardServiceImpl();
 		if (svc.editBoard(vo)) { // 정상적으로 등록됐으면 보드목록으로 간다
