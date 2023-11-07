@@ -16,7 +16,7 @@ public class GetBoardControl implements Command {
 		String bno = req.getParameter("bno");
 		BoardService svc = new BoardServiceImpl();
 		BoardVO vo = svc.getBoard(Integer.parseInt(bno));
-			System.out.println("getboardController : " + vo);
+			//System.out.println("getboardController : " + vo);
 		req.setAttribute("bno", vo);
 		
 		//요청재지정

@@ -68,7 +68,7 @@
 	
 	<h3>댓글목록</h3>
 	<ul id="list">
-	<li style = "display: none" id="template"><span>0</span><b>첫번째글입니다.</b><span>user01</span><span>2023-10-10</span></li>
+	<li style = "display: none" id="template"><span>0</span><b>첫번째글입니다.</b><span>user01</span><span>2023-10-10</span><button>삭제</button></li>
 	</ul>
 	<p><a href="boardList.do">목록으로</a></p>
 	

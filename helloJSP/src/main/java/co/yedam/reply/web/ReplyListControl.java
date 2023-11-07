@@ -29,7 +29,7 @@ public class ReplyListControl implements Command {
 		
 		resp.setContentType("text/json;charset=utf-8"); //한글 안깨지게! 
 		try {
-			resp.getWriter().print(json);
+			resp.getWriter().print(json); //요청한 곳에 응답데이터 넣어줌
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
