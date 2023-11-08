@@ -1,7 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@include file="../layout/menu.jsp"%>
-<%@include file="../layout/header.jsp"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<jsp:include page="../layout/menu.jsp"></jsp:include>
+<jsp:include page="../layout/header.jsp"></jsp:include>
 
 
 
@@ -14,7 +15,7 @@
 			</tr>
 			<tr>
 				<th>작성자</th>
-				<td><input type="text"  class="form-control" name="author" value = "<%=logId%>" readonly></td> <!-- 세션에서 값 읽어오도록!   -->
+				<td><input type="text"  class="form-control" name="author" value = "${logId }" readonly></td> <!-- 세션에서 값 읽어오도록!   -->
 			</tr>
 			<tr>
 				<th>파일명</th>

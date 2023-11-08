@@ -18,6 +18,7 @@ import co.yedam.board.web.ModifyFormControl;
 import co.yedam.board.web.RemoveBoardControl;
 import co.yedam.board.web.RemoveFormControl;
 import co.yedam.reply.web.AddReplyControl;
+import co.yedam.reply.web.RemoveReplyControl;
 import co.yedam.reply.web.ReplyListControl;
 
 
@@ -52,6 +53,14 @@ public class FrontController extends HttpServlet {
 		//댓글목록
 		map.put("/replyList.do", new ReplyListControl());
 		map.put("/addReply.do", new AddReplyControl());
+		
+		//댓글삭제
+		map.put("/removeReply.do", new RemoveReplyControl());
+		
+		//차트그리기
+		map.put("/chartForm.do", new ChartFormControl()); //페이지연결시켜주ㅡ는 곳
+		map.put("/drawChart.do", new DrawChartControl()); //실제 데이터 가져오는 곳.
+		
 	}
 
 	@Override

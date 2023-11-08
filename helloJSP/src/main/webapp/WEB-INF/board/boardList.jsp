@@ -2,44 +2,46 @@
 <%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-	
 
-<%@include file= "../layout/menu.jsp"%>
-<%@include file= "../layout/header.jsp"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
+<jsp:include page="../layout/menu.jsp"></jsp:include>
+<jsp:include page="../layout/header.jsp"></jsp:include>
 
-	<h3>게시판목록</h3>
-	<%
-		//Object obj를 List<BoardVO> list로 강제 변환한거임.
-		List<BoardVO> list = (List<BoardVO>) request.getAttribute("list"); // list<BoardVO> list; 전체조회. object타입에 반환.
-	%>
 
-	<table class = "table">
-		<thead>
+<h3>게시판목록</h3>
+
+
+
+<table class="table">
+	<thead>
+		<tr>
+
+			<th>글번호</th>
+			<th>제목</th>
+			<th>작성자</th>
+			<th>작성일자</th>
+		</tr>
+	</thead>
+
+	<tbody>
+
+		<c:forEach items="${list }" var="vo">
 			<tr>
-				
-				<th>글번호</th> 
-				<th>제목</th> 
-				<th>작성자</th> 
-				<th>작성일자</th>
+				<td>${vo.boardNo }</td>
+				<td><a href="getBoard.do?bno=${vo.boardNo }"> ${vo.title }</a></td>
+
+				<td>${vo.author }</td>
+				<td><fmt:formatDate value="${vo.writeDate }" pattern="yyyy-MM-dd HH:mm:ss"></fmt:formatDate></td>
 			</tr>
-		</thead>
-		<tbody>
-			<% 
-			for(BoardVO vo : list){ 
-			%>
-			<tr>
-				<td><%=vo.getBoardNo() %></td>
-				<td><a href="getBoard.do?bno=<%=vo.getBoardNo()%>"> <%=vo.getTitle() %></a></td>
-				
-				<td><%=vo.getAuthor() %></td>
-				<td><%=vo.getWriteDate() %></td>
-			</tr>
-			<% 
-			} 
-			%>
-		</tbody>
-	</table>
-	<p><a href="boardForm.do">등록화면</a></p>
-	
+		</c:forEach>
+
+	</tbody>
+</table>
+
+<p>
+	<a href="boardForm.do">등록화면</a>
+</p>
+
 <%@include file="../layout/footer.jsp"%>
 </html>

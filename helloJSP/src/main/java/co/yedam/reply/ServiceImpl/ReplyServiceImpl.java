@@ -1,6 +1,7 @@
 package co.yedam.reply.ServiceImpl;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 
@@ -16,8 +17,8 @@ public class ReplyServiceImpl implements ReplyService {
 	ReplyMapper mapper = sqlSession.getMapper(ReplyMapper.class); //인터페이스 , 실제인스턴스
 	
 	@Override
-	public List<ReplyVO> replyList(int boardNo) {
-		return mapper.replyList(boardNo);
+	public List<ReplyVO> replyList(int boardNo, int page) {
+		return mapper.replyList(boardNo, page);
 	}
 	
 	@Override
@@ -38,6 +39,17 @@ public class ReplyServiceImpl implements ReplyService {
 	@Override
 	public boolean delReply(int replyNo) {
 		return mapper.deleteReply(replyNo) ==1;
+	}
+
+	@Override
+	public int getTotalCnt(int boardNo) {
+		return mapper.getTotalCnt(boardNo);
+	}
+	
+	@Override
+	public List<Map<String, Object>> getReplyCountByWriter() {
+		
+		return mapper.getReplyCountByWriter();
 	}
 
 	
