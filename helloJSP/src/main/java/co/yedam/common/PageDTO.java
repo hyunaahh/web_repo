@@ -22,7 +22,7 @@ public class PageDTO {
 		this.endPage = (int)Math.ceil(currentPage/10.0) * 10; //math ceil 더블로반환해서 int로 바ㅜ꺼저야함.
 		this.startPage = this.endPage - 9;
 		
-		this.endPage = this.endPage > realEnd ? realEnd : this.endPage;
+		this.endPage = (this.endPage > realEnd) ? realEnd : this.endPage;
 		
 		this.prev = this.startPage > 1;
 		this.next = this.endPage  < realEnd; //실제마지막페이지보다 작으면 이후페이지 있음

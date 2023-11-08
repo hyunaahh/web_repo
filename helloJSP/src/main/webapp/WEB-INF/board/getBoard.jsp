@@ -112,17 +112,17 @@
 </p>
 
 <script>
-	//삭제버튼 클릭하면 실행할 함수.
+//삭제버튼 클릭하면 실행할 함수.
 	document.querySelector('input[type=button]').addEventListener('click', function(e){
 		document.forms.myForm.action = 'removeForm.do'; //폼의 이름이 마이폼인 애의 액션을 바꾼거임. -> removecontrol 만들러가야지..
 		document.forms.myForm.submit(); //myform의 submit 이벤트를 removeform.do로 바꿔주는 거.
 	});
 	
-	//댓글 전체목록
+//댓글 전체목록 보여주기
 	let bno ="${bno.boardNo }";
 	let writer = "${logId }"; 
 		//or 요렇게 bno = document.querySelector('.boardNo').innerHTML;
-	let page = 1;	
+	let page = 1;	//지금 있는 페이지에 초록색 표시하려고 썼음 
 	
 	function showList(pg = 1)	{ //페이지 초기값 넣어준거임.
 		//안보이는 li의 첫번째 요소만 제외하고(template용도기 때문에!) 지우겠다 하는거임 for 초기화! 
@@ -131,39 +131,36 @@
 	.then(resolve => resolve.json())
 	.then(result => {
 		
-		if(result.dto.total == 0){
-			let noReple = document.createElement('a');
-			noReple.innerHTML = "댓글이 없습니다.";
-			document.querySelector('.pagination').append(noReple);
-		}
 		
+		//댓글쓰면 마지막페이지에 보이도록 하기 위함
 		if(pg < 0){
 			let page = showList(Math.ceil(result.dto.total/5))
 			showList(page);
 			return;
 		}
+		
+		
+		// 댓글 삭제해서 전체 댓글 수 줄면 페이지도 조정되도록! 
+		if(pg > Math.ceil(resut.dto.total/5)){
+			page = Math.ceil(result.dto.total/5)
+			showList(page);
+		}
+		
+		//댓글 없는 곳 페이지표시 안보이게
+		if(result.dto.total == 0){
+			return;
+		}
+		
 		//result에 있는 list에 대한 한건 한건해서 목록 그려주는거
 		result.list.forEach(reply => {
 			let li = makeRow(reply);
-// 			let li = document.createElement('li');
-// 			let bnoSpan = document.createElemet('span');
-// 			bnoSpan.innerHTML=reply.boardNo;
-// 			let writerSpan = document.createElement() 
-//이런식으로하면 좀 복잡하니 아이디값 주고 아래처럼 해보자.!
-			//잘라넣기 해서 makeRow로 보냈음.
-// 			let temp = document.querySelector('#template').cloneNode(true); //디폴트가 false인데 true로!
-// 			temp.style.display = "block";
-// 			console.log(temp);
-// 			temp.querySelector('span:nth-of-type(1)').innerHTML = reply.replyNo; //스판태그의 첫번째 애를 가져올거임
-// 			temp.querySelector('b').innerHTML = reply.replyNo;
-// 			temp.querySelector('span:nth-of-type(2)').innerHTML = reply.replyer;
-// 			temp.querySelector('span:nth-of-type(3)').innerHTML = reply.replyDate;
+
 			//ul > li 생성
 			document.querySelector('#list').append(li);
 			
 		})
 			//page생성
-				console.log("dto는 뭘까요" , result.dto);
+				//console.log("dto는 뭘까요" , result.dto);
 			makePaging(result.dto); 
 			
 	})
@@ -173,7 +170,7 @@
 	
 	showList();
 	
-//page생성 - dto정보가 넘어오니까(startpage, endpage 등드등)
+//page생성 - dto정보가 넘어오니까(startpage, endpage 등드등) => 페이지숫자버튼만들기
 	function makePaging(dto={}){
 		document.querySelector('.pagination').innerHTML = '';
 		//페이지를 만들고
@@ -234,7 +231,7 @@
 		.then(result => {
 			if(result.retCode=="OK"){
 				//document.querySelector('#list').append(makeRow(result.vo));
-				showList(-1); //약간 세모임.. 
+				showList(-1); 
 			}else{
 				alert('ERROR');
 			}
@@ -255,7 +252,7 @@
 			fetch('removeReply.do?rno='+ reply.replyNo)
 			.then(resolve => resolve.json())
 			.then(result => {
-					console.log("result.retCode", result.retCode )
+					//console.log("result.retCode", result.retCode )
 				if(result.retCode == 'OK'){
 					alert('SUCCESS');
 					e.target.parentElement.remove();
