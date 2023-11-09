@@ -5,9 +5,9 @@
   </div>                 
               
 <!-- footer 내용. -->
-<footer class="py-5 bg-black">
+<footer class="py-5 bg-white">
   <div class="container px-4 px-lg-5">
-    <p class="m-0 text-center text-white">게시판만들기는어려웡...
+    <p class="m-0 text-center text-black">footer
     </p>
   </div>
 </footer>

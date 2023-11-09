@@ -141,7 +141,7 @@
 		
 		
 		// 댓글 삭제해서 전체 댓글 수 줄면 페이지도 조정되도록! 
-		if(pg > Math.ceil(resut.dto.total/5)){
+		if(pg > Math.ceil(result.dto.total/5)){
 			page = Math.ceil(result.dto.total/5)
 			showList(page);
 		}
@@ -224,7 +224,7 @@
 		fetch('addReply.do', {
 			method: 'post',
 			headers: {'Content-Type' : 'application/x-www-form-urlencoded'},
-			body: 'bno=' +bno + '&reply='+reply +'&replyer='+writer
+			body: 'bno=' + bno + '&reply='+reply +'&replyer='+writer
 			
 		})
 		.then(resolve => resolve.json())

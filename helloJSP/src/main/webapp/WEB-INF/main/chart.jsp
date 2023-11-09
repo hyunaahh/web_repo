@@ -23,12 +23,13 @@
 		fetch('drawChart.do')
 		.then(resolve => resolve.json())
 		.then(result => {
-			console.log(result); //result : 객체타입으로 들어가있음. 이걸 배열로 넣어주기!
+			console.log(result); //result : {객체타입}으로 들어가있음 -> 이걸 배열로 넣어주기!
+			
 			let dataAry = [['Writer', 'Cnt']];
 			result.forEach(item => {
-				dataAry.push([item.REPLYER, item.CNT])
+				dataAry.push([item.replyer, item.cnt]) // sql에서 소문자로 바꿔놔서 여기도 소문자 써줘야됨.
 			})
-					console.log(dataAry); //[]
+					console.log(dataAry); //[배열]
 			
 			var data = google.visualization.arrayToDataTable(dataAry);
 
