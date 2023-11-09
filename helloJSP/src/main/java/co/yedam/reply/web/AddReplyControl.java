@@ -20,6 +20,8 @@ public class AddReplyControl implements Command {
 
 	@Override
 	public void execute(HttpServletRequest req, HttpServletResponse resp) {
+		
+		String path = "board/boardList.tiles";
 		//파라메터 세개 받아옴
 		String bno = req.getParameter("bno");
 		String reply = req.getParameter("reply");

@@ -12,6 +12,8 @@ import javax.servlet.http.HttpServletResponse;
 import co.yedam.admin.web.MemberListControl;
 import co.yedam.board.web.BoardListControl;
 import co.yedam.board.web.GetBoardControl;
+import co.yedam.reply.web.AddReplyControl;
+import co.yedam.reply.web.ReplyListControl;
 
 
 //url : .do로 끝나면 밑에 애들이 실행되도록 만듦.
@@ -27,6 +29,8 @@ public class FrontController extends HttpServlet {
 		map.put("/memberList.do", new MemberListControl());
 		map.put("/getBoard.do", new GetBoardControl());
 		map.put("/replyList.do", new ReplyListControl());
+		map.put("/addReply.do", new AddReplyControl());
+	
 		
 		
 	}

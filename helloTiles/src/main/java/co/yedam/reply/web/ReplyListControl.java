@@ -21,6 +21,9 @@ public class ReplyListControl implements Command {
 
 	@Override
 	public void execute(HttpServletRequest req, HttpServletResponse resp) {
+		
+		String path = "board/boardList.tiles";
+				
 		String bno = req.getParameter("bno"); //원본 글 번호 알면 목록 가져오도록 파라메터 하나 받아옴
 		String page = req.getParameter("page"); 
 		page = page == null? "1" : page; //페이지 파라메터가 없으면 걍 1페이지 보여주겠음.

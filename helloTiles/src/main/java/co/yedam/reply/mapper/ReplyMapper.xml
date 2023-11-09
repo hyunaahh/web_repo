@@ -32,8 +32,7 @@
 		</selectKey>
 
 		insert into reply(reply_no, board_no, reply, replyer, reply_date)
-		values(seq_reply.nextval, #{boardNo}, #{reply}, #{replyer},
-		#{replyDate})
+		values(seq_reply.nextval, #{boardNo}, #{reply}, #{replyer}, #{replyDate})
 	</insert>
 
 	<update id="updateReply"
