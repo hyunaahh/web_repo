@@ -27,7 +27,7 @@
 		<c:forEach items="${list }" var="vo">
 			<tr>
 				<td>${vo.prodNo }</td>
-				<td><a href="getBoard.do?bno=${vo.prodNo }"> ${vo.prodName }</a></td>
+				<td><a href="getBoard.do?pno=${vo.prodNo }"> ${vo.prodName }</a></td>
 
 				<td>${vo.prodDesc }</td>
 				<td>${vo.price }</td>

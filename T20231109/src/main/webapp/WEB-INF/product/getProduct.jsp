@@ -38,7 +38,7 @@
 
 <!--${bno }  -->
 
-<form action="modifyForm.do" name="myForm">
+<form action="getBoard.do" name="myForm">
 	<input type="hidden" name="pno" value="${pno.prodNo }">
 	<table border="1" class="table">
 		<tr>
