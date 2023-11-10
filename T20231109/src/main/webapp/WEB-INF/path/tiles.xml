@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE tiles-definitions SYSTEM "tiles-config_3_0.dtd">
+
+<tiles-definitions>
+ 
+    <definition name="productListpage" template="/WEB-INF/layout/templateList.jsp">
+    <put-attribute name="title" value="상품 목록화면" />
+    <put-attribute name="header" value="/WEB-INF/layout/listHeader.jsp" /> 
+    <put-attribute name="body" value="/WEB-INF/layout/listMenu.jsp" />
+    <put-attribute name="footer" value="/WEB-INF/layout/listFooter.jsp" />
+  	</definition>
+  
+    <definition name="WILDCARD:product/*" extends="producListpage">
+  	<put-attribute name="body" value="/WEB-INF/product/{1}.jsp" />
+  	</definition>
+  
+
+
+</tiles-definitions>
