@@ -1,15 +1,14 @@
 package co.yedam.product.web;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.mvel2.sh.ShellSession;
-
 import co.yedam.common.Command;
+import co.yedam.product.service.ProductService;
 import co.yedam.product.service.ProductVO;
+import co.yedam.product.serviceImpl.ProductServiceImpl;
 
 
 
@@ -19,8 +18,9 @@ public class ProductListControl implements Command {
 		
 		String path = "product/productList.tiles";
 				
-		List<ProductVO> list = new ArrayList<>();
-		list.add(new ProductVO());
+		ProductService svc = new ProductServiceImpl();
+		List<ProductVO> list = svc.productList();
+		
 		req.setAttribute("list", list);
 		
 		try {

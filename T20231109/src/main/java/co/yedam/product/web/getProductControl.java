@@ -1,5 +1,7 @@
 package co.yedam.product.web;
 
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -17,8 +19,10 @@ public class getProductControl implements Command {
 		String pno = req.getParameter("pno");
 		ProductService svc = new ProductServiceImpl();
 		ProductVO vo = svc.getProduct(Integer.parseInt(pno));
-			
-		req.setAttribute("pno", vo);
+		req.setAttribute("vo", vo);
+		
+		List<ProductVO> list = svc.productListStar();
+		req.setAttribute("list", list);
 		
 		//요청재지정
 		try {

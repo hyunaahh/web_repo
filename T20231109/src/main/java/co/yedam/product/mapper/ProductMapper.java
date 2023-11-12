@@ -6,6 +6,7 @@ import co.yedam.product.service.ProductVO;
 
 public interface ProductMapper {
 	public List<ProductVO> selectList();
-	public ProductVO select(int prodNo);
+	public ProductVO select(int prodCode);
+	public List<ProductVO> selectListStar();
 	
 }

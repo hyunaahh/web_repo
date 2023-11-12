@@ -8,7 +8,7 @@ public interface ProductService {
 
 	//목록 ,단건조회, 등록, 수정, 삭제
 	public List<ProductVO> productList();
-	public ProductVO getProduct(int productNo);
-	
+	public ProductVO getProduct(int prodCode);
+	public List<ProductVO> productListStar();
 
 }

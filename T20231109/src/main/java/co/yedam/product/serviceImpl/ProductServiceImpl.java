@@ -23,11 +23,15 @@ public class ProductServiceImpl implements ProductService {
 	}
 
 	@Override
-	public ProductVO getProduct(int productNo) {
+	public ProductVO getProduct(int prodCode) {
 
-		return mapper.select(productNo);
+		return mapper.select(prodCode);
 	}
 
-
+	@Override
+	public List<ProductVO> productListStar() {
+		
+		return mapper.selectListStar();
+	}
 	
 } //end
